@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8e69e14787f3485796bda500781d1f93" Name="Diagram1">
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Anuncio" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Automovel" Width="1.5" PointX="10.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Barco" Width="1.5" PointX="7.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Categoria" Width="1.5" PointX="8.25" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.CodigoPostal" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Combustivel" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Contacto" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Marca" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Modelo" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Moto" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Peca" Width="1.5" PointX="10.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Plano" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Stand" Width="1.5" PointX="5.25" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Status" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.SubCategoria" Width="1.5" PointX="10.5" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoAutomovel" Width="1.5" PointX="8.25" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoBarco" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoCombustivel" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoContacto" Width="1.5" PointX="6" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoMota" Width="1.5" PointX="8.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoPeca" Width="1.5" PointX="8.25" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoPerm" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoPlano" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.TipoStatus" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StandVirtualTestesModel.Usuario" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Anuncio_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Anuncio_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Automovel_Anuncio" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Barco_Anuncio" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Moto_Anuncio" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Peca_Anuncio" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Automovel_Combustivel" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Automovel_TipoAutomovel" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Automovel_TipoAutomovel1" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Barco_Combustivel" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Barco_Modelo" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Barco_TipoBarco" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Peca_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_SubCategoria_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Usuario_CodigoPostal" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Combustivel_TipoCombustivel" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Moto_Combustivel" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Contacto_TipoContacto" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Contacto_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Modelo_Modelo" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Moto_Modelo" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Peca_Modelo" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Moto_TipoMota" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Peca_TipoPeca" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Plano_TipoPlano" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Plano_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Stand_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Status_TipoStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="StandVirtualTestesModel.FK_Usuario_TipoPerm" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

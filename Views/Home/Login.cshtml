@@ -1,0 +1,200 @@
+﻿@model StandVirtual.Models.Usuario
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gestão StandVirtual</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom right, #74ebd5, #9face6);
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .wave-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png) repeat-x;
+            background-size: 1000px 100px;
+        }
+
+        .wave1 {
+            animation: wave 30s linear infinite;
+            opacity: 1;
+        }
+
+        .wave2 {
+            animation: wave-reverse 15s linear infinite;
+            opacity: 0.5;
+            bottom: 10px;
+        }
+
+        .wave3 {
+            animation: wave 30s linear infinite;
+            opacity: 0.2;
+            bottom: 15px;
+        }
+
+        .wave4 {
+            animation: wave-reverse 5s linear infinite;
+            opacity: 0.7;
+            bottom: 20px;
+        }
+
+        @@keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1000px; }
+        }
+
+        @@keyframes wave-reverse {
+            0% { background-position-x: 0; }
+            100% { background-position-x: -1000px; }
+        }
+
+        .login-container {
+            position: relative;
+            width: 400px;
+            padding: 20px;
+            background: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: slide-up 0.5s ease-in-out forwards;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #3e8e41;
+        }
+
+        .error-message {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid red;
+            color: red;
+            background: #ffe5e5;
+            border-radius: 5px;
+        }
+
+        @@keyframes slide-up {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wave-container">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+        <div class="wave wave4"></div>
+    </div>
+
+    <div class="login-container">
+        <h2>Login<br>StandVirtual Management</h2>
+
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            if (TempData["MessageError"] != null)
+            {
+                <div class="error-message">
+                    <b>@TempData["MessageError"]</b>
+                </div>
+            }
+
+            <div class="form-group">
+                <label for="Email">Email:</label>
+                @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter your email" })
+                @Html.ValidationMessageFor(a => a.Email)
+            </div>
+
+            <div class="form-group">
+                <label for="Password">Password:</label>
+                @Html.PasswordFor(a => a.Password, new { @class = "form-control", placeholder = "Enter your password" })
+                @Html.ValidationMessageFor(a => a.Password)
+            </div>
+
+            <input type="submit" value="Login" class="login-btn" />
+        }
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</body>
+</html>

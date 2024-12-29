@@ -1,0 +1,1815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StandVirtualTestesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Anuncio">
+          <Key>
+            <PropertyRef Name="AnuncioID" />
+          </Key>
+          <Property Name="AnuncioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataCriacao" Type="date" Nullable="false" />
+          <Property Name="DataExpiracao" Type="date" Nullable="false" />
+          <Property Name="NumFav" Type="int" />
+          <Property Name="NumVisualizacoes" Type="int" />
+          <Property Name="NumCliques" Type="int" />
+          <Property Name="Preco" Type="int" Nullable="false" />
+          <Property Name="Foto" Type="nvarchar(max)" />
+          <Property Name="Video" Type="nvarchar(max)" />
+          <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Automovel">
+          <Key>
+            <PropertyRef Name="MatriculaAut" />
+          </Key>
+          <Property Name="MatriculaAut" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Ano" Type="int" Nullable="false" />
+          <Property Name="NumPortas" Type="int" Nullable="false" />
+          <Property Name="Cor" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Potencia" Type="int" Nullable="false" />
+          <Property Name="Cilindrada" Type="int" Nullable="false" />
+          <Property Name="TipoCaixa" Type="int" Nullable="false" />
+          <Property Name="Quilometros" Type="float" Nullable="false" />
+          <Property Name="TipoAutomovelID" Type="int" Nullable="false" />
+          <Property Name="ModeloID" Type="int" Nullable="false" />
+          <Property Name="CombustivelID" Type="int" Nullable="false" />
+          <Property Name="AnuncioID" Type="int" Nullable="false" />
+          <Property Name="Importado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Barco">
+          <Key>
+            <PropertyRef Name="MatriculaBarco" />
+          </Key>
+          <Property Name="MatriculaBarco" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="HorasNavegacao" Type="float" Nullable="false" />
+          <Property Name="Potencia" Type="int" Nullable="false" />
+          <Property Name="NumMotores" Type="int" Nullable="false" />
+          <Property Name="Comprimento" Type="int" Nullable="false" />
+          <Property Name="Lotacao" Type="int" Nullable="false" />
+          <Property Name="CapCombustivel" Type="int" Nullable="false" />
+          <Property Name="CapAgua" Type="int" Nullable="false" />
+          <Property Name="Ano" Type="int" Nullable="false" />
+          <Property Name="TipoBarcoID" Type="int" Nullable="false" />
+          <Property Name="ModeloID" Type="int" Nullable="false" />
+          <Property Name="CombustivelID" Type="int" Nullable="false" />
+          <Property Name="AnuncioID" Type="int" Nullable="false" />
+          <Property Name="Importado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaID" />
+          </Key>
+          <Property Name="CategoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeCat" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CodigoPostal">
+          <Key>
+            <PropertyRef Name="CodPostalID" />
+          </Key>
+          <Property Name="CodPostalID" Type="int" Nullable="false" />
+          <Property Name="Localizacao" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Combustivel">
+          <Key>
+            <PropertyRef Name="CombustivelID" />
+          </Key>
+          <Property Name="CombustivelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoComID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="Contacto" />
+          </Key>
+          <Property Name="Contacto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumContacto" Type="int" Nullable="false" />
+          <Property Name="TipoContactoID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeMarca" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="ModeloID" />
+          </Key>
+          <Property Name="ModeloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MarcaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Moto">
+          <Key>
+            <PropertyRef Name="MatriculaMoto" />
+          </Key>
+          <Property Name="MatriculaMoto" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Ano" Type="int" Nullable="false" />
+          <Property Name="Quilometros" Type="float" Nullable="false" />
+          <Property Name="Potencia" Type="int" Nullable="false" />
+          <Property Name="Cilindrada" Type="int" Nullable="false" />
+          <Property Name="Cor" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TipoMotaID" Type="int" Nullable="false" />
+          <Property Name="CombustivelID" Type="int" Nullable="false" />
+          <Property Name="ModeloID" Type="int" Nullable="false" />
+          <Property Name="AnuncioID" Type="int" Nullable="false" />
+          <Property Name="Importado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Peca">
+          <Key>
+            <PropertyRef Name="PecaID" />
+          </Key>
+          <Property Name="PecaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Fabricante" Type="nvarchar" MaxLength="60" />
+          <Property Name="Referencia" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TipoPecaID" Type="int" Nullable="false" />
+          <Property Name="CategoriaID" Type="int" Nullable="false" />
+          <Property Name="ModeloID" Type="int" Nullable="false" />
+          <Property Name="AnuncioID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plano">
+          <Key>
+            <PropertyRef Name="PlanoID" />
+          </Key>
+          <Property Name="PlanoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Custo" Type="int" Nullable="false" />
+          <Property Name="TipoPlanoID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stand">
+          <Key>
+            <PropertyRef Name="StandID" />
+          </Key>
+          <Property Name="StandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeStand" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubCategoria">
+          <Key>
+            <PropertyRef Name="SubCatID" />
+          </Key>
+          <Property Name="SubCatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeSubCat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoriaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoAutomovel">
+          <Key>
+            <PropertyRef Name="TipoAutomovelID" />
+          </Key>
+          <Property Name="TipoAutomovelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoBarco">
+          <Key>
+            <PropertyRef Name="TipoBarcoID" />
+          </Key>
+          <Property Name="TipoBarcoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCombustivel">
+          <Key>
+            <PropertyRef Name="TipoComID" />
+          </Key>
+          <Property Name="TipoComID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescricaoTC" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoContacto">
+          <Key>
+            <PropertyRef Name="TipoContacto" />
+          </Key>
+          <Property Name="TipoContacto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescricaoTipoContacto" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoMota">
+          <Key>
+            <PropertyRef Name="TipoMotaID" />
+          </Key>
+          <Property Name="TipoMotaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescricaoTM" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPeca">
+          <Key>
+            <PropertyRef Name="TipoPecaID" />
+          </Key>
+          <Property Name="TipoPecaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescricaoTPeca" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPerm">
+          <Key>
+            <PropertyRef Name="PermID" />
+          </Key>
+          <Property Name="PermID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPlano">
+          <Key>
+            <PropertyRef Name="TipoPlanoID" />
+          </Key>
+          <Property Name="TipoPlanoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescricaoTP" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoStatus">
+          <Key>
+            <PropertyRef Name="TipoStatusID" />
+          </Key>
+          <Property Name="TipoStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="DataCriacao" Type="date" Nullable="false" />
+          <Property Name="CodPostalId" Type="int" Nullable="false" />
+          <Property Name="PermID" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Anuncio_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Anuncio">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anuncio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Anuncio">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_Combustivel">
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Combustivel">
+              <PropertyRef Name="CombustivelID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="CombustivelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_TipoAutomovel">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_TipoAutomovel1">
+          <End Role="TipoAutomovel" Type="Self.TipoAutomovel" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAutomovel">
+              <PropertyRef Name="TipoAutomovelID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="TipoAutomovelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_Combustivel">
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Combustivel">
+              <PropertyRef Name="CombustivelID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="CombustivelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_TipoBarco">
+          <End Role="TipoBarco" Type="Self.TipoBarco" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoBarco">
+              <PropertyRef Name="TipoBarcoID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="TipoBarcoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Combustivel_TipoCombustivel">
+          <End Role="TipoCombustivel" Type="Self.TipoCombustivel" Multiplicity="1" />
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCombustivel">
+              <PropertyRef Name="TipoComID" />
+            </Principal>
+            <Dependent Role="Combustivel">
+              <PropertyRef Name="TipoComID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacto_TipoContacto">
+          <End Role="TipoContacto" Type="Self.TipoContacto" Multiplicity="1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoContacto">
+              <PropertyRef Name="TipoContacto" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="TipoContactoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacto_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Modelo">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_Combustivel">
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Combustivel">
+              <PropertyRef Name="CombustivelID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="CombustivelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_TipoMota">
+          <End Role="TipoMota" Type="Self.TipoMota" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMota">
+              <PropertyRef Name="TipoMotaID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="TipoMotaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="CategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_TipoPeca">
+          <End Role="TipoPeca" Type="Self.TipoPeca" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPeca">
+              <PropertyRef Name="TipoPecaID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="TipoPecaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plano_TipoPlano">
+          <End Role="TipoPlano" Type="Self.TipoPlano" Multiplicity="1" />
+          <End Role="Plano" Type="Self.Plano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPlano">
+              <PropertyRef Name="TipoPlanoID" />
+            </Principal>
+            <Dependent Role="Plano">
+              <PropertyRef Name="TipoPlanoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plano_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Plano" Type="Self.Plano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Plano">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stand_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Stand" Type="Self.Stand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Stand">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Status_TipoStatus">
+          <End Role="TipoStatus" Type="Self.TipoStatus" Multiplicity="1" />
+          <End Role="Status" Type="Self.Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoStatus">
+              <PropertyRef Name="TipoStatusID" />
+            </Principal>
+            <Dependent Role="Status">
+              <PropertyRef Name="TipoStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoria_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="SubCategoria">
+              <PropertyRef Name="CategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_CodigoPostal">
+          <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CodigoPostal">
+              <PropertyRef Name="CodPostalID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="CodPostalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoPerm">
+          <End Role="TipoPerm" Type="Self.TipoPerm" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPerm">
+              <PropertyRef Name="PermID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="PermID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StandVirtualTestesModelStoreContainer">
+          <EntitySet Name="Anuncio" EntityType="Self.Anuncio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Automovel" EntityType="Self.Automovel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Barco" EntityType="Self.Barco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CodigoPostal" EntityType="Self.CodigoPostal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Combustivel" EntityType="Self.Combustivel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moto" EntityType="Self.Moto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peca" EntityType="Self.Peca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plano" EntityType="Self.Plano" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stand" EntityType="Self.Stand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoAutomovel" EntityType="Self.TipoAutomovel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoBarco" EntityType="Self.TipoBarco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCombustivel" EntityType="Self.TipoCombustivel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoContacto" EntityType="Self.TipoContacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoMota" EntityType="Self.TipoMota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPeca" EntityType="Self.TipoPeca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPerm" EntityType="Self.TipoPerm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPlano" EntityType="Self.TipoPlano" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoStatus" EntityType="Self.TipoStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Anuncio_Status" Association="Self.FK_Anuncio_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Anuncio" EntitySet="Anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anuncio_Usuario" Association="Self.FK_Anuncio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Anuncio" EntitySet="Anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_Anuncio" Association="Self.FK_Automovel_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_Combustivel" Association="Self.FK_Automovel_Combustivel">
+            <End Role="Combustivel" EntitySet="Combustivel" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_TipoAutomovel" Association="Self.FK_Automovel_TipoAutomovel">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_TipoAutomovel1" Association="Self.FK_Automovel_TipoAutomovel1">
+            <End Role="TipoAutomovel" EntitySet="TipoAutomovel" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_Anuncio" Association="Self.FK_Barco_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_Combustivel" Association="Self.FK_Barco_Combustivel">
+            <End Role="Combustivel" EntitySet="Combustivel" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_Modelo" Association="Self.FK_Barco_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_TipoBarco" Association="Self.FK_Barco_TipoBarco">
+            <End Role="TipoBarco" EntitySet="TipoBarco" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Combustivel_TipoCombustivel" Association="Self.FK_Combustivel_TipoCombustivel">
+            <End Role="TipoCombustivel" EntitySet="TipoCombustivel" />
+            <End Role="Combustivel" EntitySet="Combustivel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacto_TipoContacto" Association="Self.FK_Contacto_TipoContacto">
+            <End Role="TipoContacto" EntitySet="TipoContacto" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacto_Usuario" Association="Self.FK_Contacto_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Modelo" Association="Self.FK_Modelo_Modelo">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_Anuncio" Association="Self.FK_Moto_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_Combustivel" Association="Self.FK_Moto_Combustivel">
+            <End Role="Combustivel" EntitySet="Combustivel" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_Modelo" Association="Self.FK_Moto_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_TipoMota" Association="Self.FK_Moto_TipoMota">
+            <End Role="TipoMota" EntitySet="TipoMota" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_Anuncio" Association="Self.FK_Peca_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_Categoria" Association="Self.FK_Peca_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_Modelo" Association="Self.FK_Peca_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_TipoPeca" Association="Self.FK_Peca_TipoPeca">
+            <End Role="TipoPeca" EntitySet="TipoPeca" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plano_TipoPlano" Association="Self.FK_Plano_TipoPlano">
+            <End Role="TipoPlano" EntitySet="TipoPlano" />
+            <End Role="Plano" EntitySet="Plano" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plano_Usuario" Association="Self.FK_Plano_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Plano" EntitySet="Plano" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stand_Usuario" Association="Self.FK_Stand_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Stand" EntitySet="Stand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Status_TipoStatus" Association="Self.FK_Status_TipoStatus">
+            <End Role="TipoStatus" EntitySet="TipoStatus" />
+            <End Role="Status" EntitySet="Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoria_Categoria" Association="Self.FK_SubCategoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_CodigoPostal" Association="Self.FK_Usuario_CodigoPostal">
+            <End Role="CodigoPostal" EntitySet="CodigoPostal" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoPerm" Association="Self.FK_Usuario_TipoPerm">
+            <End Role="TipoPerm" EntitySet="TipoPerm" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StandVirtualTestesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Anuncio">
+          <Key>
+            <PropertyRef Name="AnuncioID" />
+          </Key>
+          <Property Name="AnuncioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataExpiracao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NumFav" Type="Int32" />
+          <Property Name="NumVisualizacoes" Type="Int32" />
+          <Property Name="NumCliques" Type="Int32" />
+          <Property Name="Preco" Type="Int32" Nullable="false" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Anuncio_Status" FromRole="Anuncio" ToRole="Status" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Anuncio_Usuario" FromRole="Anuncio" ToRole="Usuario" />
+          <NavigationProperty Name="Automovel" Relationship="Self.FK_Automovel_Anuncio" FromRole="Anuncio" ToRole="Automovel" />
+          <NavigationProperty Name="Barco" Relationship="Self.FK_Barco_Anuncio" FromRole="Anuncio" ToRole="Barco" />
+          <NavigationProperty Name="Moto" Relationship="Self.FK_Moto_Anuncio" FromRole="Anuncio" ToRole="Moto" />
+          <NavigationProperty Name="Peca" Relationship="Self.FK_Peca_Anuncio" FromRole="Anuncio" ToRole="Peca" />
+        </EntityType>
+        <EntityType Name="Automovel">
+          <Key>
+            <PropertyRef Name="MatriculaAut" />
+          </Key>
+          <Property Name="MatriculaAut" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="NumPortas" Type="Int32" Nullable="false" />
+          <Property Name="Cor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Potencia" Type="Int32" Nullable="false" />
+          <Property Name="Cilindrada" Type="Int32" Nullable="false" />
+          <Property Name="TipoCaixa" Type="Int32" Nullable="false" />
+          <Property Name="Quilometros" Type="Double" Nullable="false" />
+          <Property Name="TipoAutomovelID" Type="Int32" Nullable="false" />
+          <Property Name="ModeloID" Type="Int32" Nullable="false" />
+          <Property Name="CombustivelID" Type="Int32" Nullable="false" />
+          <Property Name="AnuncioID" Type="Int32" Nullable="false" />
+          <Property Name="Importado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Anuncio" Relationship="Self.FK_Automovel_Anuncio" FromRole="Automovel" ToRole="Anuncio" />
+          <NavigationProperty Name="Combustivel" Relationship="Self.FK_Automovel_Combustivel" FromRole="Automovel" ToRole="Combustivel" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK_Automovel_TipoAutomovel" FromRole="Automovel" ToRole="Modelo" />
+          <NavigationProperty Name="TipoAutomovel" Relationship="Self.FK_Automovel_TipoAutomovel1" FromRole="Automovel" ToRole="TipoAutomovel" />
+        </EntityType>
+        <EntityType Name="Barco">
+          <Key>
+            <PropertyRef Name="MatriculaBarco" />
+          </Key>
+          <Property Name="MatriculaBarco" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HorasNavegacao" Type="Double" Nullable="false" />
+          <Property Name="Potencia" Type="Int32" Nullable="false" />
+          <Property Name="NumMotores" Type="Int32" Nullable="false" />
+          <Property Name="Comprimento" Type="Int32" Nullable="false" />
+          <Property Name="Lotacao" Type="Int32" Nullable="false" />
+          <Property Name="CapCombustivel" Type="Int32" Nullable="false" />
+          <Property Name="CapAgua" Type="Int32" Nullable="false" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="TipoBarcoID" Type="Int32" Nullable="false" />
+          <Property Name="ModeloID" Type="Int32" Nullable="false" />
+          <Property Name="CombustivelID" Type="Int32" Nullable="false" />
+          <Property Name="AnuncioID" Type="Int32" Nullable="false" />
+          <Property Name="Importado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Anuncio" Relationship="Self.FK_Barco_Anuncio" FromRole="Barco" ToRole="Anuncio" />
+          <NavigationProperty Name="Combustivel" Relationship="Self.FK_Barco_Combustivel" FromRole="Barco" ToRole="Combustivel" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK_Barco_Modelo" FromRole="Barco" ToRole="Modelo" />
+          <NavigationProperty Name="TipoBarco" Relationship="Self.FK_Barco_TipoBarco" FromRole="Barco" ToRole="TipoBarco" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaID" />
+          </Key>
+          <Property Name="CategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeCat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Peca" Relationship="Self.FK_Peca_Categoria" FromRole="Categoria" ToRole="Peca" />
+          <NavigationProperty Name="SubCategoria" Relationship="Self.FK_SubCategoria_Categoria" FromRole="Categoria" ToRole="SubCategoria" />
+        </EntityType>
+        <EntityType Name="CodigoPostal">
+          <Key>
+            <PropertyRef Name="CodPostalID" />
+          </Key>
+          <Property Name="CodPostalID" Type="Int32" Nullable="false" />
+          <Property Name="Localizacao" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_CodigoPostal" FromRole="CodigoPostal" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Combustivel">
+          <Key>
+            <PropertyRef Name="CombustivelID" />
+          </Key>
+          <Property Name="CombustivelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoComID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Automovel" Relationship="Self.FK_Automovel_Combustivel" FromRole="Combustivel" ToRole="Automovel" />
+          <NavigationProperty Name="Barco" Relationship="Self.FK_Barco_Combustivel" FromRole="Combustivel" ToRole="Barco" />
+          <NavigationProperty Name="TipoCombustivel" Relationship="Self.FK_Combustivel_TipoCombustivel" FromRole="Combustivel" ToRole="TipoCombustivel" />
+          <NavigationProperty Name="Moto" Relationship="Self.FK_Moto_Combustivel" FromRole="Combustivel" ToRole="Moto" />
+        </EntityType>
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="Contacto1" />
+          </Key>
+          <Property Name="Contacto1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumContacto" Type="Int32" Nullable="false" />
+          <Property Name="TipoContactoID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoContacto" Relationship="Self.FK_Contacto_TipoContacto" FromRole="Contacto" ToRole="TipoContacto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Contacto_Usuario" FromRole="Contacto" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeMarca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK_Modelo_Modelo" FromRole="Marca" ToRole="Modelo" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="ModeloID" />
+          </Key>
+          <Property Name="ModeloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MarcaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Automovel" Relationship="Self.FK_Automovel_TipoAutomovel" FromRole="Modelo" ToRole="Automovel" />
+          <NavigationProperty Name="Barco" Relationship="Self.FK_Barco_Modelo" FromRole="Modelo" ToRole="Barco" />
+          <NavigationProperty Name="Marca" Relationship="Self.FK_Modelo_Modelo" FromRole="Modelo" ToRole="Marca" />
+          <NavigationProperty Name="Moto" Relationship="Self.FK_Moto_Modelo" FromRole="Modelo" ToRole="Moto" />
+          <NavigationProperty Name="Peca" Relationship="Self.FK_Peca_Modelo" FromRole="Modelo" ToRole="Peca" />
+        </EntityType>
+        <EntityType Name="Moto">
+          <Key>
+            <PropertyRef Name="MatriculaMoto" />
+          </Key>
+          <Property Name="MatriculaMoto" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="Quilometros" Type="Double" Nullable="false" />
+          <Property Name="Potencia" Type="Int32" Nullable="false" />
+          <Property Name="Cilindrada" Type="Int32" Nullable="false" />
+          <Property Name="Cor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipoMotaID" Type="Int32" Nullable="false" />
+          <Property Name="CombustivelID" Type="Int32" Nullable="false" />
+          <Property Name="ModeloID" Type="Int32" Nullable="false" />
+          <Property Name="AnuncioID" Type="Int32" Nullable="false" />
+          <Property Name="Importado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Anuncio" Relationship="Self.FK_Moto_Anuncio" FromRole="Moto" ToRole="Anuncio" />
+          <NavigationProperty Name="Combustivel" Relationship="Self.FK_Moto_Combustivel" FromRole="Moto" ToRole="Combustivel" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK_Moto_Modelo" FromRole="Moto" ToRole="Modelo" />
+          <NavigationProperty Name="TipoMota" Relationship="Self.FK_Moto_TipoMota" FromRole="Moto" ToRole="TipoMota" />
+        </EntityType>
+        <EntityType Name="Peca">
+          <Key>
+            <PropertyRef Name="PecaID" />
+          </Key>
+          <Property Name="PecaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fabricante" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Referencia" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipoPecaID" Type="Int32" Nullable="false" />
+          <Property Name="CategoriaID" Type="Int32" Nullable="false" />
+          <Property Name="ModeloID" Type="Int32" Nullable="false" />
+          <Property Name="AnuncioID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Anuncio" Relationship="Self.FK_Peca_Anuncio" FromRole="Peca" ToRole="Anuncio" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Peca_Categoria" FromRole="Peca" ToRole="Categoria" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK_Peca_Modelo" FromRole="Peca" ToRole="Modelo" />
+          <NavigationProperty Name="TipoPeca" Relationship="Self.FK_Peca_TipoPeca" FromRole="Peca" ToRole="TipoPeca" />
+        </EntityType>
+        <EntityType Name="Plano">
+          <Key>
+            <PropertyRef Name="PlanoID" />
+          </Key>
+          <Property Name="PlanoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Custo" Type="Int32" Nullable="false" />
+          <Property Name="TipoPlanoID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoPlano" Relationship="Self.FK_Plano_TipoPlano" FromRole="Plano" ToRole="TipoPlano" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Plano_Usuario" FromRole="Plano" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Stand">
+          <Key>
+            <PropertyRef Name="StandID" />
+          </Key>
+          <Property Name="StandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeStand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Stand_Usuario" FromRole="Stand" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Anuncio" Relationship="Self.FK_Anuncio_Status" FromRole="Status" ToRole="Anuncio" />
+          <NavigationProperty Name="TipoStatus" Relationship="Self.FK_Status_TipoStatus" FromRole="Status" ToRole="TipoStatus" />
+        </EntityType>
+        <EntityType Name="SubCategoria">
+          <Key>
+            <PropertyRef Name="SubCatID" />
+          </Key>
+          <Property Name="SubCatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeSubCat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoriaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_SubCategoria_Categoria" FromRole="SubCategoria" ToRole="Categoria" />
+        </EntityType>
+        <EntityType Name="TipoAutomovel">
+          <Key>
+            <PropertyRef Name="TipoAutomovelID" />
+          </Key>
+          <Property Name="TipoAutomovelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Automovel" Relationship="Self.FK_Automovel_TipoAutomovel1" FromRole="TipoAutomovel" ToRole="Automovel" />
+        </EntityType>
+        <EntityType Name="TipoBarco">
+          <Key>
+            <PropertyRef Name="TipoBarcoID" />
+          </Key>
+          <Property Name="TipoBarcoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Barco" Relationship="Self.FK_Barco_TipoBarco" FromRole="TipoBarco" ToRole="Barco" />
+        </EntityType>
+        <EntityType Name="TipoCombustivel">
+          <Key>
+            <PropertyRef Name="TipoComID" />
+          </Key>
+          <Property Name="TipoComID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoTC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Combustivel" Relationship="Self.FK_Combustivel_TipoCombustivel" FromRole="TipoCombustivel" ToRole="Combustivel" />
+        </EntityType>
+        <EntityType Name="TipoContacto">
+          <Key>
+            <PropertyRef Name="TipoContacto1" />
+          </Key>
+          <Property Name="TipoContacto1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoTipoContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contacto" Relationship="Self.FK_Contacto_TipoContacto" FromRole="TipoContacto" ToRole="Contacto" />
+        </EntityType>
+        <EntityType Name="TipoMota">
+          <Key>
+            <PropertyRef Name="TipoMotaID" />
+          </Key>
+          <Property Name="TipoMotaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoTM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Moto" Relationship="Self.FK_Moto_TipoMota" FromRole="TipoMota" ToRole="Moto" />
+        </EntityType>
+        <EntityType Name="TipoPeca">
+          <Key>
+            <PropertyRef Name="TipoPecaID" />
+          </Key>
+          <Property Name="TipoPecaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoTPeca" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Peca" Relationship="Self.FK_Peca_TipoPeca" FromRole="TipoPeca" ToRole="Peca" />
+        </EntityType>
+        <EntityType Name="TipoPerm">
+          <Key>
+            <PropertyRef Name="PermID" />
+          </Key>
+          <Property Name="PermID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_TipoPerm" FromRole="TipoPerm" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="TipoPlano">
+          <Key>
+            <PropertyRef Name="TipoPlanoID" />
+          </Key>
+          <Property Name="TipoPlanoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoTP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Plano" Relationship="Self.FK_Plano_TipoPlano" FromRole="TipoPlano" ToRole="Plano" />
+        </EntityType>
+        <EntityType Name="TipoStatus">
+          <Key>
+            <PropertyRef Name="TipoStatusID" />
+          </Key>
+          <Property Name="TipoStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Status_TipoStatus" FromRole="TipoStatus" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CodPostalId" Type="Int32" Nullable="false" />
+          <Property Name="PermID" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Anuncio" Relationship="Self.FK_Anuncio_Usuario" FromRole="Usuario" ToRole="Anuncio" />
+          <NavigationProperty Name="CodigoPostal" Relationship="Self.FK_Usuario_CodigoPostal" FromRole="Usuario" ToRole="CodigoPostal" />
+          <NavigationProperty Name="Contacto" Relationship="Self.FK_Contacto_Usuario" FromRole="Usuario" ToRole="Contacto" />
+          <NavigationProperty Name="Plano" Relationship="Self.FK_Plano_Usuario" FromRole="Usuario" ToRole="Plano" />
+          <NavigationProperty Name="Stand" Relationship="Self.FK_Stand_Usuario" FromRole="Usuario" ToRole="Stand" />
+          <NavigationProperty Name="TipoPerm" Relationship="Self.FK_Usuario_TipoPerm" FromRole="Usuario" ToRole="TipoPerm" />
+        </EntityType>
+        <Association Name="FK_Anuncio_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Anuncio">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anuncio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Anuncio">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_Anuncio">
+          <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anuncio">
+              <PropertyRef Name="AnuncioID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="AnuncioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_Combustivel">
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Combustivel">
+              <PropertyRef Name="CombustivelID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="CombustivelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_TipoAutomovel">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automovel_TipoAutomovel1">
+          <End Role="TipoAutomovel" Type="Self.TipoAutomovel" Multiplicity="1" />
+          <End Role="Automovel" Type="Self.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAutomovel">
+              <PropertyRef Name="TipoAutomovelID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="TipoAutomovelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_Combustivel">
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Combustivel">
+              <PropertyRef Name="CombustivelID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="CombustivelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barco_TipoBarco">
+          <End Role="TipoBarco" Type="Self.TipoBarco" Multiplicity="1" />
+          <End Role="Barco" Type="Self.Barco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoBarco">
+              <PropertyRef Name="TipoBarcoID" />
+            </Principal>
+            <Dependent Role="Barco">
+              <PropertyRef Name="TipoBarcoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="CategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoria_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="SubCategoria">
+              <PropertyRef Name="CategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_CodigoPostal">
+          <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CodigoPostal">
+              <PropertyRef Name="CodPostalID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="CodPostalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Combustivel_TipoCombustivel">
+          <End Role="TipoCombustivel" Type="Self.TipoCombustivel" Multiplicity="1" />
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCombustivel">
+              <PropertyRef Name="TipoComID" />
+            </Principal>
+            <Dependent Role="Combustivel">
+              <PropertyRef Name="TipoComID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_Combustivel">
+          <End Role="Combustivel" Type="Self.Combustivel" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Combustivel">
+              <PropertyRef Name="CombustivelID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="CombustivelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacto_TipoContacto">
+          <End Role="TipoContacto" Type="Self.TipoContacto" Multiplicity="1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoContacto">
+              <PropertyRef Name="TipoContacto1" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="TipoContactoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacto_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Modelo">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Moto_TipoMota">
+          <End Role="TipoMota" Type="Self.TipoMota" Multiplicity="1" />
+          <End Role="Moto" Type="Self.Moto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMota">
+              <PropertyRef Name="TipoMotaID" />
+            </Principal>
+            <Dependent Role="Moto">
+              <PropertyRef Name="TipoMotaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peca_TipoPeca">
+          <End Role="TipoPeca" Type="Self.TipoPeca" Multiplicity="1" />
+          <End Role="Peca" Type="Self.Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPeca">
+              <PropertyRef Name="TipoPecaID" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="TipoPecaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plano_TipoPlano">
+          <End Role="TipoPlano" Type="Self.TipoPlano" Multiplicity="1" />
+          <End Role="Plano" Type="Self.Plano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPlano">
+              <PropertyRef Name="TipoPlanoID" />
+            </Principal>
+            <Dependent Role="Plano">
+              <PropertyRef Name="TipoPlanoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plano_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Plano" Type="Self.Plano" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Plano">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stand_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Stand" Type="Self.Stand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Stand">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Status_TipoStatus">
+          <End Role="TipoStatus" Type="Self.TipoStatus" Multiplicity="1" />
+          <End Role="Status" Type="Self.Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoStatus">
+              <PropertyRef Name="TipoStatusID" />
+            </Principal>
+            <Dependent Role="Status">
+              <PropertyRef Name="TipoStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoPerm">
+          <End Role="TipoPerm" Type="Self.TipoPerm" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPerm">
+              <PropertyRef Name="PermID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="PermID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StandVirtualTestesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Anuncio" EntityType="Self.Anuncio" />
+          <EntitySet Name="Automovel" EntityType="Self.Automovel" />
+          <EntitySet Name="Barco" EntityType="Self.Barco" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="CodigoPostal" EntityType="Self.CodigoPostal" />
+          <EntitySet Name="Combustivel" EntityType="Self.Combustivel" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" />
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" />
+          <EntitySet Name="Moto" EntityType="Self.Moto" />
+          <EntitySet Name="Peca" EntityType="Self.Peca" />
+          <EntitySet Name="Plano" EntityType="Self.Plano" />
+          <EntitySet Name="Stand" EntityType="Self.Stand" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" />
+          <EntitySet Name="TipoAutomovel" EntityType="Self.TipoAutomovel" />
+          <EntitySet Name="TipoBarco" EntityType="Self.TipoBarco" />
+          <EntitySet Name="TipoCombustivel" EntityType="Self.TipoCombustivel" />
+          <EntitySet Name="TipoContacto" EntityType="Self.TipoContacto" />
+          <EntitySet Name="TipoMota" EntityType="Self.TipoMota" />
+          <EntitySet Name="TipoPeca" EntityType="Self.TipoPeca" />
+          <EntitySet Name="TipoPerm" EntityType="Self.TipoPerm" />
+          <EntitySet Name="TipoPlano" EntityType="Self.TipoPlano" />
+          <EntitySet Name="TipoStatus" EntityType="Self.TipoStatus" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Anuncio_Status" Association="Self.FK_Anuncio_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Anuncio" EntitySet="Anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anuncio_Usuario" Association="Self.FK_Anuncio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Anuncio" EntitySet="Anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_Anuncio" Association="Self.FK_Automovel_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_Anuncio" Association="Self.FK_Barco_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_Anuncio" Association="Self.FK_Moto_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_Anuncio" Association="Self.FK_Peca_Anuncio">
+            <End Role="Anuncio" EntitySet="Anuncio" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_Combustivel" Association="Self.FK_Automovel_Combustivel">
+            <End Role="Combustivel" EntitySet="Combustivel" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_TipoAutomovel" Association="Self.FK_Automovel_TipoAutomovel">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automovel_TipoAutomovel1" Association="Self.FK_Automovel_TipoAutomovel1">
+            <End Role="TipoAutomovel" EntitySet="TipoAutomovel" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_Combustivel" Association="Self.FK_Barco_Combustivel">
+            <End Role="Combustivel" EntitySet="Combustivel" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_Modelo" Association="Self.FK_Barco_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barco_TipoBarco" Association="Self.FK_Barco_TipoBarco">
+            <End Role="TipoBarco" EntitySet="TipoBarco" />
+            <End Role="Barco" EntitySet="Barco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_Categoria" Association="Self.FK_Peca_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoria_Categoria" Association="Self.FK_SubCategoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_CodigoPostal" Association="Self.FK_Usuario_CodigoPostal">
+            <End Role="CodigoPostal" EntitySet="CodigoPostal" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Combustivel_TipoCombustivel" Association="Self.FK_Combustivel_TipoCombustivel">
+            <End Role="TipoCombustivel" EntitySet="TipoCombustivel" />
+            <End Role="Combustivel" EntitySet="Combustivel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_Combustivel" Association="Self.FK_Moto_Combustivel">
+            <End Role="Combustivel" EntitySet="Combustivel" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacto_TipoContacto" Association="Self.FK_Contacto_TipoContacto">
+            <End Role="TipoContacto" EntitySet="TipoContacto" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacto_Usuario" Association="Self.FK_Contacto_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Modelo" Association="Self.FK_Modelo_Modelo">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_Modelo" Association="Self.FK_Moto_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_Modelo" Association="Self.FK_Peca_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Moto_TipoMota" Association="Self.FK_Moto_TipoMota">
+            <End Role="TipoMota" EntitySet="TipoMota" />
+            <End Role="Moto" EntitySet="Moto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peca_TipoPeca" Association="Self.FK_Peca_TipoPeca">
+            <End Role="TipoPeca" EntitySet="TipoPeca" />
+            <End Role="Peca" EntitySet="Peca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plano_TipoPlano" Association="Self.FK_Plano_TipoPlano">
+            <End Role="TipoPlano" EntitySet="TipoPlano" />
+            <End Role="Plano" EntitySet="Plano" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plano_Usuario" Association="Self.FK_Plano_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Plano" EntitySet="Plano" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stand_Usuario" Association="Self.FK_Stand_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Stand" EntitySet="Stand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Status_TipoStatus" Association="Self.FK_Status_TipoStatus">
+            <End Role="TipoStatus" EntitySet="TipoStatus" />
+            <End Role="Status" EntitySet="Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoPerm" Association="Self.FK_Usuario_TipoPerm">
+            <End Role="TipoPerm" EntitySet="TipoPerm" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StandVirtualTestesModelStoreContainer" CdmEntityContainer="StandVirtualTestesEntities1">
+          <EntitySetMapping Name="Anuncio">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Anuncio">
+              <MappingFragment StoreEntitySet="Anuncio">
+                <ScalarProperty Name="AnuncioID" ColumnName="AnuncioID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="DataExpiracao" ColumnName="DataExpiracao" />
+                <ScalarProperty Name="NumFav" ColumnName="NumFav" />
+                <ScalarProperty Name="NumVisualizacoes" ColumnName="NumVisualizacoes" />
+                <ScalarProperty Name="NumCliques" ColumnName="NumCliques" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Automovel">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Automovel">
+              <MappingFragment StoreEntitySet="Automovel">
+                <ScalarProperty Name="MatriculaAut" ColumnName="MatriculaAut" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="NumPortas" ColumnName="NumPortas" />
+                <ScalarProperty Name="Cor" ColumnName="Cor" />
+                <ScalarProperty Name="Potencia" ColumnName="Potencia" />
+                <ScalarProperty Name="Cilindrada" ColumnName="Cilindrada" />
+                <ScalarProperty Name="TipoCaixa" ColumnName="TipoCaixa" />
+                <ScalarProperty Name="Quilometros" ColumnName="Quilometros" />
+                <ScalarProperty Name="TipoAutomovelID" ColumnName="TipoAutomovelID" />
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="CombustivelID" ColumnName="CombustivelID" />
+                <ScalarProperty Name="AnuncioID" ColumnName="AnuncioID" />
+                <ScalarProperty Name="Importado" ColumnName="Importado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barco">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Barco">
+              <MappingFragment StoreEntitySet="Barco">
+                <ScalarProperty Name="MatriculaBarco" ColumnName="MatriculaBarco" />
+                <ScalarProperty Name="HorasNavegacao" ColumnName="HorasNavegacao" />
+                <ScalarProperty Name="Potencia" ColumnName="Potencia" />
+                <ScalarProperty Name="NumMotores" ColumnName="NumMotores" />
+                <ScalarProperty Name="Comprimento" ColumnName="Comprimento" />
+                <ScalarProperty Name="Lotacao" ColumnName="Lotacao" />
+                <ScalarProperty Name="CapCombustivel" ColumnName="CapCombustivel" />
+                <ScalarProperty Name="CapAgua" ColumnName="CapAgua" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="TipoBarcoID" ColumnName="TipoBarcoID" />
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="CombustivelID" ColumnName="CombustivelID" />
+                <ScalarProperty Name="AnuncioID" ColumnName="AnuncioID" />
+                <ScalarProperty Name="Importado" ColumnName="Importado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
+                <ScalarProperty Name="NomeCat" ColumnName="NomeCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodigoPostal">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.CodigoPostal">
+              <MappingFragment StoreEntitySet="CodigoPostal">
+                <ScalarProperty Name="CodPostalID" ColumnName="CodPostalID" />
+                <ScalarProperty Name="Localizacao" ColumnName="Localizacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Combustivel">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Combustivel">
+              <MappingFragment StoreEntitySet="Combustivel">
+                <ScalarProperty Name="CombustivelID" ColumnName="CombustivelID" />
+                <ScalarProperty Name="TipoComID" ColumnName="TipoComID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacto">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Contacto">
+              <MappingFragment StoreEntitySet="Contacto">
+                <ScalarProperty Name="Contacto1" ColumnName="Contacto" />
+                <ScalarProperty Name="NumContacto" ColumnName="NumContacto" />
+                <ScalarProperty Name="TipoContactoID" ColumnName="TipoContactoID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="NomeMarca" ColumnName="NomeMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modelo">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Modelo">
+              <MappingFragment StoreEntitySet="Modelo">
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moto">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Moto">
+              <MappingFragment StoreEntitySet="Moto">
+                <ScalarProperty Name="MatriculaMoto" ColumnName="MatriculaMoto" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="Quilometros" ColumnName="Quilometros" />
+                <ScalarProperty Name="Potencia" ColumnName="Potencia" />
+                <ScalarProperty Name="Cilindrada" ColumnName="Cilindrada" />
+                <ScalarProperty Name="Cor" ColumnName="Cor" />
+                <ScalarProperty Name="TipoMotaID" ColumnName="TipoMotaID" />
+                <ScalarProperty Name="CombustivelID" ColumnName="CombustivelID" />
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="AnuncioID" ColumnName="AnuncioID" />
+                <ScalarProperty Name="Importado" ColumnName="Importado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peca">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Peca">
+              <MappingFragment StoreEntitySet="Peca">
+                <ScalarProperty Name="PecaID" ColumnName="PecaID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="TipoPecaID" ColumnName="TipoPecaID" />
+                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="AnuncioID" ColumnName="AnuncioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plano">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Plano">
+              <MappingFragment StoreEntitySet="Plano">
+                <ScalarProperty Name="PlanoID" ColumnName="PlanoID" />
+                <ScalarProperty Name="Custo" ColumnName="Custo" />
+                <ScalarProperty Name="TipoPlanoID" ColumnName="TipoPlanoID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stand">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Stand">
+              <MappingFragment StoreEntitySet="Stand">
+                <ScalarProperty Name="StandID" ColumnName="StandID" />
+                <ScalarProperty Name="NomeStand" ColumnName="NomeStand" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="TipoStatusID" ColumnName="TipoStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategoria">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.SubCategoria">
+              <MappingFragment StoreEntitySet="SubCategoria">
+                <ScalarProperty Name="SubCatID" ColumnName="SubCatID" />
+                <ScalarProperty Name="NomeSubCat" ColumnName="NomeSubCat" />
+                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAutomovel">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoAutomovel">
+              <MappingFragment StoreEntitySet="TipoAutomovel">
+                <ScalarProperty Name="TipoAutomovelID" ColumnName="TipoAutomovelID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoBarco">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoBarco">
+              <MappingFragment StoreEntitySet="TipoBarco">
+                <ScalarProperty Name="TipoBarcoID" ColumnName="TipoBarcoID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCombustivel">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoCombustivel">
+              <MappingFragment StoreEntitySet="TipoCombustivel">
+                <ScalarProperty Name="TipoComID" ColumnName="TipoComID" />
+                <ScalarProperty Name="DescricaoTC" ColumnName="DescricaoTC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoContacto">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoContacto">
+              <MappingFragment StoreEntitySet="TipoContacto">
+                <ScalarProperty Name="TipoContacto1" ColumnName="TipoContacto" />
+                <ScalarProperty Name="DescricaoTipoContacto" ColumnName="DescricaoTipoContacto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoMota">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoMota">
+              <MappingFragment StoreEntitySet="TipoMota">
+                <ScalarProperty Name="TipoMotaID" ColumnName="TipoMotaID" />
+                <ScalarProperty Name="DescricaoTM" ColumnName="DescricaoTM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPeca">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoPeca">
+              <MappingFragment StoreEntitySet="TipoPeca">
+                <ScalarProperty Name="TipoPecaID" ColumnName="TipoPecaID" />
+                <ScalarProperty Name="DescricaoTPeca" ColumnName="DescricaoTPeca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPerm">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoPerm">
+              <MappingFragment StoreEntitySet="TipoPerm">
+                <ScalarProperty Name="PermID" ColumnName="PermID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPlano">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoPlano">
+              <MappingFragment StoreEntitySet="TipoPlano">
+                <ScalarProperty Name="TipoPlanoID" ColumnName="TipoPlanoID" />
+                <ScalarProperty Name="DescricaoTP" ColumnName="DescricaoTP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoStatus">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.TipoStatus">
+              <MappingFragment StoreEntitySet="TipoStatus">
+                <ScalarProperty Name="TipoStatusID" ColumnName="TipoStatusID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="StandVirtualTestesModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="CodPostalId" ColumnName="CodPostalId" />
+                <ScalarProperty Name="PermID" ColumnName="PermID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
