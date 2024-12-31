@@ -1,0 +1,45 @@
+﻿@model StandVirtual.Models.Contacto
+
+@{
+    ViewBag.Title = "Contact Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2>Contact Details</h2>
+        </div>
+
+        <div class="card-body">
+            <!-- Feedback Messages -->
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            <!-- Details Section -->
+            <dl class="row">
+                <dt class="col-sm-4">Contact Number</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumContacto)</dd>
+
+                <dt class="col-sm-4">Contact Type</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.TipoContacto.DescricaoTipoContacto)</dd>
+
+                <dt class="col-sm-4">User Email</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Usuario.Email)</dd>
+            </dl>
+
+            <!-- Actions -->
+            <div class="d-flex justify-content-between mt-4">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Contacto1 }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿@model StandVirtual.Models.Automovel
+
+@{
+    ViewBag.Title = "Edit Car";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>Edit Car</h2>
+        </div>
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.MatriculaAut)
+
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Ano, "Year", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Ano, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter year" } })
+                    @Html.ValidationMessageFor(model => model.Ano, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.NumPortas, "Number of Doors", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.NumPortas, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter number of doors" } })
+                    @Html.ValidationMessageFor(model => model.NumPortas, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Cor, "Color", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Cor, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter color" } })
+                    @Html.ValidationMessageFor(model => model.Cor, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Potencia, "Power", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Potencia, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter power" } })
+                    @Html.ValidationMessageFor(model => model.Potencia, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Cilindrada, "Engine Capacity", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Cilindrada, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter engine capacity" } })
+                    @Html.ValidationMessageFor(model => model.Cilindrada, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.TipoCaixa, "Gearbox Type", new { @class = "form-label" })
+                    @Html.DropDownListFor(
+                        model => model.TipoCaixa,
+                        new SelectList(new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "Manual", Value = "Manual" },
+                            new SelectListItem { Text = "Automatic", Value = "Automatic" }
+                        }, "Value", "Text", Model.TipoCaixa), // Preselect the current value
+                        "Select gearbox type", // Placeholder text
+                        new { @class = "form-control" }
+                    )
+                    @Html.ValidationMessageFor(model => model.TipoCaixa, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Quilometros, "Mileage", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Quilometros, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter mileage" } })
+                    @Html.ValidationMessageFor(model => model.Quilometros, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.TipoAutomovelID, "Car Type", new { @class = "form-label" })
+                    @Html.DropDownList("TipoAutomovelID", null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TipoAutomovelID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.ModeloID, "Model", new { @class = "form-label" })
+                    @Html.DropDownList("ModeloID", null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ModeloID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.CombustivelID, "Fuel Type", new { @class = "form-label" })
+                    @Html.DropDownList("CombustivelID", null, "Select fuel type", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CombustivelID, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.AnuncioID, "Ad Title", new { @class = "form-label" })
+                    @Html.DropDownList("AnuncioID", null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AnuncioID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Importado, "Is Imported?", new { @class = "form-label" })
+                    <div class="form-check">
+                        @Html.EditorFor(model => model.Importado, new { htmlAttributes = new { @class = "form-check-input" } })
+                        @Html.ValidationMessageFor(model => model.Importado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model StandVirtual.Models.Contacto
+
+@{
+    ViewBag.Title = "Create Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2>Create Contact</h2>
+        </div>
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                @TempData["Message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (TempData["MessageError"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                @TempData["MessageError"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.NumContacto, "Contact Number", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.NumContacto, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter contact number" } })
+                    @Html.ValidationMessageFor(model => model.NumContacto, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.TipoContactoID, "Contact Type", new { @class = "form-label" })
+                    @Html.DropDownList("TipoContactoID", null, "Select a contact type", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.TipoContactoID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.UserID, "User", new { @class = "form-label" })
+                    @Html.DropDownList("UserID", null, "Select a user", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿@model IEnumerable<StandVirtual.Models.Automovel>
+
+@{
+    ViewBag.Title = "Car List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
+
+<!-- DataTables Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#carTable').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.1/i18n/en-GB.json"
+            }
+        });
+    });
+</script>
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Car List</h2>
+            <div>
+                @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                {
+                    @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-success me-2" })
+                }
+                <a class="btn btn-dark" href="@Url.Action("Index", "Automovel", new { id = "null" })">
+                    <i class="fas fa-sync-alt"></i> Clear
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!-- Feedback Messages -->
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    @TempData["Message"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            <!-- DataTable -->
+            <table class="table table-hover table-bordered" id="carTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th>License Plate</th>
+                        <th>Year</th>
+                        <th>Number of Doors</th>
+                        <th>Color</th>
+                        <th>Power</th>
+                        <th>Engine Capacity</th>
+                        <th>Mileage</th>
+                        <th>Car Type</th>
+                        <th>Model</th>
+                        <th>Fuel Type</th>
+                        <th>Ad Title</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.MatriculaAut)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Ano)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumPortas)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Cor)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Potencia)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Cilindrada)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quilometros)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TipoAutomovel.Descricao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Modelo.Descricao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Combustivel.CombustivelID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Anuncio.Titulo)</td>
+                            <td>
+                                <div class="d-flex justify-content-start">
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.MatriculaAut }, new { @class = "btn btn-warning btn-sm me-2", title = "Edit" })
+                                    }
+                                    @Html.ActionLink("Details", "Details", new { id = item.MatriculaAut }, new { @class = "btn btn-info btn-sm me-2", title = "Details" })
+                                    @if ((string)Session["UserPerm"] == "1")
+                                    {
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.MatriculaAut }, new { @class = "btn btn-danger btn-sm", title = "Delete" })
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

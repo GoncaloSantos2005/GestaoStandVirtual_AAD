@@ -1,0 +1,57 @@
+﻿@model StandVirtual.Models.Anuncio
+
+@{
+    ViewBag.Title = "Announcement Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h2>Announcement Details</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Title</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Titulo)</dd>
+
+                <dt class="col-sm-4">Creation Date</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.DataCriacao)</dd>
+
+                <dt class="col-sm-4">Expiration Date</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.DataExpiracao)</dd>
+
+                <dt class="col-sm-4">Favorites Count</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumFav)</dd>
+
+                <dt class="col-sm-4">Views</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumVisualizacoes)</dd>
+
+                <dt class="col-sm-4">Clicks</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumCliques)</dd>
+
+                <dt class="col-sm-4">Price</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Preco)</dd>
+
+                <dt class="col-sm-4">Photo</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Foto)</dd>
+
+                <dt class="col-sm-4">Video</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Video)</dd>
+
+                <dt class="col-sm-4">Description</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Descricao)</dd>
+
+                <dt class="col-sm-4">Status</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Status.TipoStatus.Descricao)</dd>
+
+                <dt class="col-sm-4">User Email</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Usuario.Email)</dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.AnuncioID }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

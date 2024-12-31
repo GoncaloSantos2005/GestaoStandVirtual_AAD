@@ -10,23 +10,23 @@ using StandVirtual.Models;
 
 namespace StandVirtual.Controllers
 {
-    public class TipoContactoesController : Controller
+    public class TipoAutomovelController : Controller
     {
         private StandVirtualTestesEntities1 db = new StandVirtualTestesEntities1();
 
-        // GET: TipoContactoes
+        // GET: TipoAutomovel
         public ActionResult Index()
         {
             if (Session["UserId"] != null)
             {
                 if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
                 {
-                    var tipoContactos = db.TipoContacto.ToList();
-                    return View(tipoContactos);
+                    var tipoAutomoveis = db.TipoAutomovel.ToList();
+                    return View(tipoAutomoveis);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to view contact types!";
+                    TempData["MessageError"] = "You do not have permissions to view the car type list!";
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -38,7 +38,7 @@ namespace StandVirtual.Controllers
         }
 
 
-        // GET: TipoContactoes/Details/5
+        // GET: TipoAutomovel/Details/5
         public ActionResult Details(int? id)
         {
             if (Session["UserId"] != null)
@@ -47,22 +47,20 @@ namespace StandVirtual.Controllers
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
-                        return RedirectToAction("Index");
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
 
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    TipoAutomovel tipoAutomovel = db.TipoAutomovel.Find(id);
+                    if (tipoAutomovel == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
-                        return RedirectToAction("Index");
+                        return HttpNotFound();
                     }
 
-                    return View(tipoContacto);
+                    return View(tipoAutomovel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to view contact type details!";
+                    TempData["MessageError"] = "You do not have permissions to view car type details!";
                     return RedirectToAction("Index");
                 }
             }
@@ -73,58 +71,55 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // GET: TipoContactoes/Create
+
+        // GET: TipoAutomovel/Create
         public ActionResult Create()
         {
             if (Session["UserId"] != null)
             {
                 if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
                 {
-                    // Preenchendo o ViewBag com os dados necessários
-
                     return View();
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to validate a model/version!";
+                    TempData["MessageError"] = "You do not have permissions to create a car type!";
                     return RedirectToAction("Index");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You have to log in first!";
+                TempData["MessageError"] = "You need to log in first!";
                 return RedirectToAction("Login", "Home");
             }
         }
 
-        // POST: TipoContactoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: TipoAutomovel/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TipoContacto1,DescricaoTipoContacto")] TipoContacto tipoContacto)
+        public ActionResult Create([Bind(Include = "TipoAutomovelID,Descricao")] TipoAutomovel tipoAutomovel)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1")
+                if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
                 {
                     if (ModelState.IsValid)
                     {
-                        tipoContacto.TipoContacto1 = 0;
-                        db.TipoContacto.Add(tipoContacto);
+                        tipoAutomovel.TipoAutomovelID = 0;
+                        db.TipoAutomovel.Add(tipoAutomovel);
                         db.SaveChanges();
 
-                        TempData["Message"] = "Contact type created successfully!";
-                        return RedirectToAction("Create", "TipoContactoes");
+                        TempData["Message"] = "Car type created successfully!";
+                        return RedirectToAction("Create");
                     }
 
-                    TempData["MessageError"] = "Invalid data. Please review the form and try again.";
-                    return View(tipoContacto);
+                    TempData["MessageError"] = "Invalid data. Please check the form and try again.";
+                    return View(tipoAutomovel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to create a contact type!";
-                    return RedirectToAction("View");
+                    TempData["MessageError"] = "You do not have permissions to create a car type!";
+                    return RedirectToAction("Index");
                 }
             }
             else
@@ -135,7 +130,7 @@ namespace StandVirtual.Controllers
         }
 
 
-        // GET: TipoContactoes/Edit/5
+        // GET: TipoAutomovel/Edit/5
         public ActionResult Edit(int? id)
         {
             if (Session["UserId"] != null)
@@ -144,22 +139,20 @@ namespace StandVirtual.Controllers
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
-                        return RedirectToAction("Index");
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
 
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    TipoAutomovel tipoAutomovel = db.TipoAutomovel.Find(id);
+                    if (tipoAutomovel == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
-                        return RedirectToAction("Index");
+                        return HttpNotFound();
                     }
 
-                    return View(tipoContacto);
+                    return View(tipoAutomovel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to edit a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to edit a car type!";
                     return RedirectToAction("Index");
                 }
             }
@@ -170,10 +163,10 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // POST: TipoContactoes/Edit/5
+        // POST: TipoAutomovel/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TipoContacto1,DescricaoTipoContacto")] TipoContacto tipoContacto)
+        public ActionResult Edit([Bind(Include = "TipoAutomovelID,Descricao")] TipoAutomovel tipoAutomovel)
         {
             if (Session["UserId"] != null)
             {
@@ -181,19 +174,19 @@ namespace StandVirtual.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        db.Entry(tipoContacto).State = EntityState.Modified;
+                        db.Entry(tipoAutomovel).State = EntityState.Modified;
                         db.SaveChanges();
 
-                        TempData["Message"] = "Contact type updated successfully!";
+                        TempData["Message"] = "Car type updated successfully!";
                         return RedirectToAction("Index");
                     }
 
-                    TempData["MessageError"] = "Invalid data. Please review the form and try again.";
-                    return View(tipoContacto);
+                    TempData["MessageError"] = "Invalid data. Please check the form and try again.";
+                    return View(tipoAutomovel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to edit a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to edit a car type!";
                     return RedirectToAction("Index");
                 }
             }
@@ -204,31 +197,29 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // GET: TipoContactoes/Delete/5
+        // GET: TipoAutomovel/Delete/5
         public ActionResult Delete(int? id)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1") // Verificar se o utilizador tem permissões para eliminar
+                if ((string)Session["UserPerm"] == "1")
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
-                        return RedirectToAction("Index");
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
 
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    TipoAutomovel tipoAutomovel = db.TipoAutomovel.Find(id);
+                    if (tipoAutomovel == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
-                        return RedirectToAction("Index");
+                        return HttpNotFound();
                     }
 
-                    return View(tipoContacto);
+                    return View(tipoAutomovel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to delete a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to delete a car type!";
                     return RedirectToAction("Index");
                 }
             }
@@ -239,31 +230,33 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // POST: TipoContactoes/Delete/5
+        // POST: TipoAutomovel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1") // Verificar se o utilizador tem permissões para eliminar
+                if ((string)Session["UserPerm"] == "1")
                 {
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    TipoAutomovel tipoAutomovel = db.TipoAutomovel.Find(id);
+                    if (tipoAutomovel != null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
-                        return RedirectToAction("Index");
+                        db.TipoAutomovel.Remove(tipoAutomovel);
+                        db.SaveChanges();
+
+                        TempData["Message"] = "Car type deleted successfully!";
+                    }
+                    else
+                    {
+                        TempData["MessageError"] = "The car type does not exist!";
                     }
 
-                    db.TipoContacto.Remove(tipoContacto);
-                    db.SaveChanges();
-
-                    TempData["Message"] = $"Contact type '{tipoContacto.TipoContacto1}' deleted successfully!";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to delete a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to delete a car type!";
                     return RedirectToAction("Index");
                 }
             }
@@ -273,6 +266,7 @@ namespace StandVirtual.Controllers
                 return RedirectToAction("Login", "Home");
             }
         }
+
 
         protected override void Dispose(bool disposing)
         {

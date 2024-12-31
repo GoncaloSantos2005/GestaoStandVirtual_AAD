@@ -1,27 +1,28 @@
 ﻿@model StandVirtual.Models.TipoContacto
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Contact Type Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>TipoContacto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DescricaoTipoContacto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DescricaoTipoContacto)
-        </dd>
-
-    </dl>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>Contact Type Details</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    Nome
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.DescricaoTipoContacto)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TipoContacto1 }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TipoContacto1 }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

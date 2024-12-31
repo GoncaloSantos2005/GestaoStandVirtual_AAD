@@ -10,35 +10,35 @@ using StandVirtual.Models;
 
 namespace StandVirtual.Controllers
 {
-    public class TipoContactoesController : Controller
+    public class ContactosController : Controller
     {
         private StandVirtualTestesEntities1 db = new StandVirtualTestesEntities1();
 
-        // GET: TipoContactoes
+        // GET: Contactos/Index
         public ActionResult Index()
         {
             if (Session["UserId"] != null)
             {
                 if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
                 {
-                    var tipoContactos = db.TipoContacto.ToList();
-                    return View(tipoContactos);
+                    var contacto = db.Contacto.Include(c => c.TipoContacto).Include(c => c.Usuario).ToList();
+                    return View(contacto);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to view contact types!";
-                    return RedirectToAction("Index", "Home");
+                    TempData["MessageError"] = "You do not have permission to view contacts.";
+                    return RedirectToAction("Dashboard", "Home");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You need to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
 
 
-        // GET: TipoContactoes/Details/5
+        // GET: Contactos/Details/5
         public ActionResult Details(int? id)
         {
             if (Session["UserId"] != null)
@@ -47,95 +47,93 @@ namespace StandVirtual.Controllers
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
+                        TempData["MessageError"] = "Invalid contact ID.";
                         return RedirectToAction("Index");
                     }
-
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Contacto contacto = db.Contacto.Find(id);
+                    if (contacto == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
+                        TempData["MessageError"] = "Contact not found.";
                         return RedirectToAction("Index");
                     }
-
-                    return View(tipoContacto);
+                    return View(contacto);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to view contact type details!";
+                    TempData["MessageError"] = "You do not have permission to view contact details.";
                     return RedirectToAction("Index");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You need to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
 
-        // GET: TipoContactoes/Create
+
+        // GET: Contactos/Create
         public ActionResult Create()
         {
             if (Session["UserId"] != null)
             {
                 if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
                 {
-                    // Preenchendo o ViewBag com os dados necessários
-
+                    ViewBag.TipoContactoID = new SelectList(db.TipoContacto, "TipoContacto1", "DescricaoTipoContacto");
+                    ViewBag.UserID = new SelectList(db.Usuario, "UserID", "Email");
                     return View();
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to validate a model/version!";
-                    return RedirectToAction("Index");
+                    TempData["MessageError"] = "You do not have permission to create contacts.";
+                    return RedirectToAction("Index", "Contactos");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You have to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
 
-        // POST: TipoContactoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Contactos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TipoContacto1,DescricaoTipoContacto")] TipoContacto tipoContacto)
+        public ActionResult Create([Bind(Include = "Contacto1,NumContacto,TipoContactoID,UserID")] Contacto contacto)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1")
+                if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
                 {
                     if (ModelState.IsValid)
                     {
-                        tipoContacto.TipoContacto1 = 0;
-                        db.TipoContacto.Add(tipoContacto);
+                        contacto.Contacto1 = 0;
+                        db.Contacto.Add(contacto);
                         db.SaveChanges();
 
-                        TempData["Message"] = "Contact type created successfully!";
-                        return RedirectToAction("Create", "TipoContactoes");
+                        TempData["Message"] = "Contact created successfully!";
+                        return RedirectToAction("Create");
                     }
 
-                    TempData["MessageError"] = "Invalid data. Please review the form and try again.";
-                    return View(tipoContacto);
+                    TempData["MessageError"] = "Invalid data. Please review the form.";
+                    ViewBag.TipoContactoID = new SelectList(db.TipoContacto, "TipoContacto1", "DescricaoTipoContacto", contacto.TipoContactoID);
+                    ViewBag.UserID = new SelectList(db.Usuario, "UserID", "Email", contacto.UserID);
+                    return View(contacto);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to create a contact type!";
-                    return RedirectToAction("View");
+                    TempData["MessageError"] = "You do not have permission to create contacts.";
+                    return RedirectToAction("Index", "Contactos");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You need to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
 
-
-        // GET: TipoContactoes/Edit/5
+        // GET: Contactos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (Session["UserId"] != null)
@@ -144,36 +142,36 @@ namespace StandVirtual.Controllers
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
+                        TempData["MessageError"] = "Invalid contact ID.";
                         return RedirectToAction("Index");
                     }
-
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Contacto contacto = db.Contacto.Find(id);
+                    if (contacto == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
+                        TempData["MessageError"] = "Contact not found.";
                         return RedirectToAction("Index");
                     }
-
-                    return View(tipoContacto);
+                    ViewBag.TipoContactoID = new SelectList(db.TipoContacto, "TipoContacto1", "DescricaoTipoContacto", contacto.TipoContactoID);
+                    ViewBag.UserID = new SelectList(db.Usuario, "UserID", "Email", contacto.UserID);
+                    return View(contacto);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to edit a contact type!";
+                    TempData["MessageError"] = "You do not have permission to edit contacts.";
                     return RedirectToAction("Index");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You need to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
 
-        // POST: TipoContactoes/Edit/5
+        // POST: Contactos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TipoContacto1,DescricaoTipoContacto")] TipoContacto tipoContacto)
+        public ActionResult Edit([Bind(Include = "Contacto1,NumContacto,TipoContactoID,UserID")] Contacto contacto)
         {
             if (Session["UserId"] != null)
             {
@@ -181,98 +179,98 @@ namespace StandVirtual.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        db.Entry(tipoContacto).State = EntityState.Modified;
+                        db.Entry(contacto).State = EntityState.Modified;
                         db.SaveChanges();
-
-                        TempData["Message"] = "Contact type updated successfully!";
+                        TempData["Message"] = "Contact updated successfully!";
                         return RedirectToAction("Index");
                     }
 
-                    TempData["MessageError"] = "Invalid data. Please review the form and try again.";
-                    return View(tipoContacto);
+                    TempData["MessageError"] = "Invalid data. Please review the form.";
+                    ViewBag.TipoContactoID = new SelectList(db.TipoContacto, "TipoContacto1", "DescricaoTipoContacto", contacto.TipoContactoID);
+                    ViewBag.UserID = new SelectList(db.Usuario, "UserID", "Email", contacto.UserID);
+                    return View(contacto);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to edit a contact type!";
+                    TempData["MessageError"] = "You do not have permission to edit contacts.";
                     return RedirectToAction("Index");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You need to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
 
-        // GET: TipoContactoes/Delete/5
+        // GET: Contactos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1") // Verificar se o utilizador tem permissões para eliminar
+                if ((string)Session["UserPerm"] == "1")
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
+                        TempData["MessageError"] = "Invalid contact ID.";
                         return RedirectToAction("Index");
                     }
-
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Contacto contacto = db.Contacto.Find(id);
+                    if (contacto == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
+                        TempData["MessageError"] = "Contact not found.";
                         return RedirectToAction("Index");
                     }
-
-                    return View(tipoContacto);
+                    return View(contacto);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to delete a contact type!";
+                    TempData["MessageError"] = "You do not have permission to delete contacts.";
                     return RedirectToAction("Index");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You need to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
 
-        // POST: TipoContactoes/Delete/5
+        // POST: Contactos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1") // Verificar se o utilizador tem permissões para eliminar
+                if ((string)Session["UserPerm"] == "1")
                 {
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Contacto contacto = db.Contacto.Find(id);
+                    if (contacto == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
+                        TempData["MessageError"] = "Contact not found.";
                         return RedirectToAction("Index");
                     }
 
-                    db.TipoContacto.Remove(tipoContacto);
+                    db.Contacto.Remove(contacto);
                     db.SaveChanges();
 
-                    TempData["Message"] = $"Contact type '{tipoContacto.TipoContacto1}' deleted successfully!";
+                    TempData["Message"] = "Contact deleted successfully!";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to delete a contact type!";
+                    TempData["MessageError"] = "You do not have permission to delete contacts.";
                     return RedirectToAction("Index");
                 }
             }
             else
             {
-                TempData["MessageError"] = "You need to log in first!";
+                TempData["MessageError"] = "You need to log in first.";
                 return RedirectToAction("Login", "Home");
             }
         }
+
 
         protected override void Dispose(bool disposing)
         {

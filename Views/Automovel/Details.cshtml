@@ -1,0 +1,66 @@
+﻿@model StandVirtual.Models.Automovel
+
+@{
+    ViewBag.Title = "Car Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>Car Details</h2>
+        </div>
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <dl class="row">
+                <dt class="col-sm-4">Year</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Ano)</dd>
+
+                <dt class="col-sm-4">Number of Doors</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumPortas)</dd>
+
+                <dt class="col-sm-4">Color</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cor)</dd>
+
+                <dt class="col-sm-4">Power</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Potencia)</dd>
+
+                <dt class="col-sm-4">Engine Capacity</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cilindrada)</dd>
+
+                <dt class="col-sm-4">Gearbox Type</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.TipoCaixa)</dd>
+
+                <dt class="col-sm-4">Mileage</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Quilometros)</dd>
+
+                <dt class="col-sm-4">Imported</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Importado)</dd>
+
+                <dt class="col-sm-4">Ad Title</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Anuncio.Titulo)</dd>
+
+                <dt class="col-sm-4">Fuel Type</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Combustivel.CombustivelID)</dd>
+
+                <dt class="col-sm-4">Model</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Modelo.Descricao)</dd>
+
+                <dt class="col-sm-4">Car Type</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.TipoAutomovel.Descricao)</dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.MatriculaAut }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

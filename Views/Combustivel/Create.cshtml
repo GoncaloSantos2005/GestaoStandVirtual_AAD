@@ -1,14 +1,14 @@
-﻿@model StandVirtual.Models.TipoContacto
+﻿@model StandVirtual.Models.Combustivel
 
 @{
-    ViewBag.Title = "Create Contact Type";
+    ViewBag.Title = "Create Fuel";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container mt-4">
     <div class="card">
         <div class="card-header bg-primary text-white">
-            <h2>Create Contact Type</h2>
+            <h2>Create Fuel</h2>
         </div>
 
         <div class="card-body">
@@ -38,12 +38,12 @@
             {
                 @Html.AntiForgeryToken()
 
-                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })   
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.DescricaoTipoContacto, "Description", new { @class = "form-label" })
-                    @Html.EditorFor(model => model.DescricaoTipoContacto, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.DescricaoTipoContacto, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.TipoComID, "Fuel Type", new { @class = "form-label" })
+                    @Html.DropDownList("TipoComID", null, new { @class = "form-select", required = "required" })
+                    @Html.ValidationMessageFor(model => model.TipoComID, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="d-flex justify-content-between">
@@ -54,7 +54,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -10,23 +10,23 @@ using StandVirtual.Models;
 
 namespace StandVirtual.Controllers
 {
-    public class TipoContactoesController : Controller
+    public class CombustivelController : Controller
     {
         private StandVirtualTestesEntities1 db = new StandVirtualTestesEntities1();
 
-        // GET: TipoContactoes
+        // GET: Combustivel
         public ActionResult Index()
         {
             if (Session["UserId"] != null)
             {
                 if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
                 {
-                    var tipoContactos = db.TipoContacto.ToList();
-                    return View(tipoContactos);
+                    var combustivel = db.Combustivel.Include(c => c.TipoCombustivel).ToList();
+                    return View(combustivel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to view contact types!";
+                    TempData["MessageError"] = "You do not have permissions to view the fuel list!";
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -37,8 +37,7 @@ namespace StandVirtual.Controllers
             }
         }
 
-
-        // GET: TipoContactoes/Details/5
+        // GET: Combustivel/Details/5
         public ActionResult Details(int? id)
         {
             if (Session["UserId"] != null)
@@ -47,22 +46,23 @@ namespace StandVirtual.Controllers
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
+                        TempData["MessageError"] = "Invalid request! Fuel ID is missing.";
                         return RedirectToAction("Index");
                     }
 
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Combustivel combustivel = db.Combustivel.Include(c => c.TipoCombustivel)
+                                                            .FirstOrDefault(c => c.CombustivelID == id);
+                    if (combustivel == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
+                        TempData["MessageError"] = "The specified fuel record was not found.";
                         return RedirectToAction("Index");
                     }
 
-                    return View(tipoContacto);
+                    return View(combustivel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to view contact type details!";
+                    TempData["MessageError"] = "You do not have permissions to view fuel details!";
                     return RedirectToAction("Index");
                 }
             }
@@ -73,58 +73,21 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // GET: TipoContactoes/Create
+
+        // GET: Combustivel/Create
         public ActionResult Create()
         {
             if (Session["UserId"] != null)
             {
                 if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
                 {
-                    // Preenchendo o ViewBag com os dados necessários
-
+                    ViewBag.TipoComID = new SelectList(db.TipoCombustivel, "TipoComID", "DescricaoTC");
                     return View();
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to validate a model/version!";
+                    TempData["MessageError"] = "You do not have permissions to add a new fuel!";
                     return RedirectToAction("Index");
-                }
-            }
-            else
-            {
-                TempData["MessageError"] = "You have to log in first!";
-                return RedirectToAction("Login", "Home");
-            }
-        }
-
-        // POST: TipoContactoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TipoContacto1,DescricaoTipoContacto")] TipoContacto tipoContacto)
-        {
-            if (Session["UserId"] != null)
-            {
-                if ((string)Session["UserPerm"] == "1")
-                {
-                    if (ModelState.IsValid)
-                    {
-                        tipoContacto.TipoContacto1 = 0;
-                        db.TipoContacto.Add(tipoContacto);
-                        db.SaveChanges();
-
-                        TempData["Message"] = "Contact type created successfully!";
-                        return RedirectToAction("Create", "TipoContactoes");
-                    }
-
-                    TempData["MessageError"] = "Invalid data. Please review the form and try again.";
-                    return View(tipoContacto);
-                }
-                else
-                {
-                    TempData["MessageError"] = "You do not have permissions to create a contact type!";
-                    return RedirectToAction("View");
                 }
             }
             else
@@ -134,8 +97,41 @@ namespace StandVirtual.Controllers
             }
         }
 
+        // POST: Combustivel/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "CombustivelID,TipoComID")] Combustivel combustivel)
+        {
+            if (Session["UserId"] != null)
+            {
+                if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Combustivel.Add(combustivel);
+                        db.SaveChanges();
+                        TempData["Message"] = "Fuel added successfully!";
+                        return RedirectToAction("Create");
+                    }
 
-        // GET: TipoContactoes/Edit/5
+                    TempData["MessageError"] = "Failed to create the fuel record. Please review the form.";
+                    ViewBag.TipoComID = new SelectList(db.TipoCombustivel, "TipoComID", "DescricaoTC", combustivel.TipoComID);
+                    return View(combustivel);
+                }
+                else
+                {
+                    TempData["MessageError"] = "You do not have permissions to add a new fuel!";
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                TempData["MessageError"] = "You need to log in first!";
+                return RedirectToAction("Login", "Home");
+            }
+        }
+
+        // GET: Combustivel/Edit/5
         public ActionResult Edit(int? id)
         {
             if (Session["UserId"] != null)
@@ -144,22 +140,23 @@ namespace StandVirtual.Controllers
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
+                        TempData["MessageError"] = "Invalid fuel ID.";
                         return RedirectToAction("Index");
                     }
 
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Combustivel combustivel = db.Combustivel.Find(id);
+                    if (combustivel == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
+                        TempData["MessageError"] = "Fuel record not found.";
                         return RedirectToAction("Index");
                     }
 
-                    return View(tipoContacto);
+                    ViewBag.TipoComID = new SelectList(db.TipoCombustivel, "TipoComID", "DescricaoTC", combustivel.TipoComID);
+                    return View(combustivel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to edit a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to edit this record!";
                     return RedirectToAction("Index");
                 }
             }
@@ -170,10 +167,10 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // POST: TipoContactoes/Edit/5
+        // POST: Combustivel/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TipoContacto1,DescricaoTipoContacto")] TipoContacto tipoContacto)
+        public ActionResult Edit([Bind(Include = "CombustivelID,TipoComID")] Combustivel combustivel)
         {
             if (Session["UserId"] != null)
             {
@@ -181,19 +178,19 @@ namespace StandVirtual.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        db.Entry(tipoContacto).State = EntityState.Modified;
+                        db.Entry(combustivel).State = EntityState.Modified;
                         db.SaveChanges();
-
-                        TempData["Message"] = "Contact type updated successfully!";
+                        TempData["Message"] = "Fuel record updated successfully!";
                         return RedirectToAction("Index");
                     }
 
-                    TempData["MessageError"] = "Invalid data. Please review the form and try again.";
-                    return View(tipoContacto);
+                    TempData["MessageError"] = "Failed to update the record. Please review the form.";
+                    ViewBag.TipoComID = new SelectList(db.TipoCombustivel, "TipoComID", "DescricaoTC", combustivel.TipoComID);
+                    return View(combustivel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to edit a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to edit this record!";
                     return RedirectToAction("Index");
                 }
             }
@@ -204,31 +201,32 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // GET: TipoContactoes/Delete/5
+
+        // GET: Combustivel/Delete/5
         public ActionResult Delete(int? id)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1") // Verificar se o utilizador tem permissões para eliminar
+                if ((string)Session["UserPerm"] == "1")
                 {
                     if (id == null)
                     {
-                        TempData["MessageError"] = "Invalid request. ID is required.";
+                        TempData["MessageError"] = "Invalid fuel ID.";
                         return RedirectToAction("Index");
                     }
 
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Combustivel combustivel = db.Combustivel.Find(id);
+                    if (combustivel == null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
+                        TempData["MessageError"] = "Fuel record not found.";
                         return RedirectToAction("Index");
                     }
 
-                    return View(tipoContacto);
+                    return View(combustivel);
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to delete a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to delete this record!";
                     return RedirectToAction("Index");
                 }
             }
@@ -239,31 +237,32 @@ namespace StandVirtual.Controllers
             }
         }
 
-        // POST: TipoContactoes/Delete/5
+        // POST: Combustivel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             if (Session["UserId"] != null)
             {
-                if ((string)Session["UserPerm"] == "1") // Verificar se o utilizador tem permissões para eliminar
+                if ((string)Session["UserPerm"] == "1")
                 {
-                    TipoContacto tipoContacto = db.TipoContacto.Find(id);
-                    if (tipoContacto == null)
+                    Combustivel combustivel = db.Combustivel.Find(id);
+                    if (combustivel != null)
                     {
-                        TempData["MessageError"] = "Contact type not found.";
-                        return RedirectToAction("Index");
+                        db.Combustivel.Remove(combustivel);
+                        db.SaveChanges();
+                        TempData["Message"] = "Fuel record deleted successfully!";
+                    }
+                    else
+                    {
+                        TempData["MessageError"] = "Fuel record not found.";
                     }
 
-                    db.TipoContacto.Remove(tipoContacto);
-                    db.SaveChanges();
-
-                    TempData["Message"] = $"Contact type '{tipoContacto.TipoContacto1}' deleted successfully!";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["MessageError"] = "You do not have permissions to delete a contact type!";
+                    TempData["MessageError"] = "You do not have permissions to delete this record!";
                     return RedirectToAction("Index");
                 }
             }

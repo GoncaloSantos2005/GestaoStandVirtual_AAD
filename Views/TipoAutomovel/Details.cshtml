@@ -1,0 +1,30 @@
+﻿@model StandVirtual.Models.TipoAutomovel
+
+@{
+    ViewBag.Title = "Car Type Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h2>Car Type Details</h2>
+        </div>
+
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    Description
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="card-footer d-flex justify-content-between">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TipoAutomovelID }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

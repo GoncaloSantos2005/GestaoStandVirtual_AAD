@@ -81,122 +81,308 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
                         {
-
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-bars text-white"></i>
+                                    <i class="nav-icon fas fa-address-book text-white"></i>
                                     <p class="text-white">
-                                        Categorias
+                                        Contact Type
                                         <i class="right fas fa-angle-left text-white"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="~/Categorias/Index" class="nav-link">
-                                            <i class="far fa-list-alt nav-icon text-white"></i>
-                                            <p>Lista</p>
+                                        <a href="~/TipoContactoes/Index" class="nav-link">
+                                            <i class="fas fa-list-alt nav-icon text-white"></i>
+                                            <p>List</p>
                                         </a>
                                     </li>
-                                    @if ((string)Session["UserPerm"] == "1")
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
                                     {
                                         <li class="nav-item">
-                                            <a href="~/Categorias/Create" class="nav-link">
-                                                <i class="fa fa-plus-square nav-icon text-white"></i>
-                                                <p>Criar</p>
+                                            <a href="~/TipoContactoes/Create" class="nav-link">
+                                                <i class="fas fa-user-plus nav-icon text-white"></i>
+                                                <p>Create</p>
                                             </a>
                                         </li>
                                     }
                                 </ul>
                             </li>
-
                         }
 
-                        @if ((string)Session["UserPerm"] == "1")
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
                         {
-
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-bars text-white"></i>
+                                    <i class="nav-icon fas fa-address-book text-white"></i>
                                     <p class="text-white">
-                                        Sub-Categorias
+                                        Contacts
                                         <i class="right fas fa-angle-left text-white"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="~/SubCategorias/Index" class="nav-link">
-                                            <i class="far fa-list-alt nav-icon text-white"></i>
-                                            <p>Lista</p>
+                                        <a href="~/Contactos/Index" class="nav-link">
+                                            <i class="fas fa-list text-white nav-icon"></i>
+                                            <p>List</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="~/SubCategorias/Create" class="nav-link">
-                                            <i class="fa fa-plus-square nav-icon text-white"></i>
-                                            <p>Criar</p>
-                                        </a>
-                                    </li>
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/Contactos/Create" class="nav-link">
+                                                <i class="fas fa-user-plus text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </li>
-
                         }
 
-                        @if ((string)Session["UserPerm"] == "1")
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
                         {
-
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-bars text-white"></i>
+                                    <i class="nav-icon fas fa-car text-white"></i>
                                     <p class="text-white">
-                                        Modelos
+                                        Car Type
                                         <i class="right fas fa-angle-left text-white"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="~/Modelos/Index" class="nav-link">
-                                            <i class="far fa-list-alt nav-icon text-white"></i>
-                                            <p>Lista</p>
+                                        <a href="~/TipoAutomovel/Index" class="nav-link">
+                                            <i class="fas fa-list text-white nav-icon"></i>
+                                            <p>List</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="~/Modelos/Create" class="nav-link">
-                                            <i class="fa fa-plus-square nav-icon text-white"></i>
-                                            <p>Criar</p>
-                                        </a>
-                                    </li>
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/TipoAutomovel/Create" class="nav-link">
+                                                <i class="fas fa-plus-circle text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </li>
-
                         }
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                        {
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-gas-pump text-white"></i>
+                                    <p class="text-white">
+                                        Fuel Type
+                                        <i class="right fas fa-angle-left text-white"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/TipoCombustivel/Index" class="nav-link">
+                                            <i class="fas fa-list-ul text-white nav-icon"></i>
+                                            <p>List</p>
+                                        </a>
+                                    </li>
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/TipoCombustivel/Create" class="nav-link">
+                                                <i class="fas fa-plus text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                        {
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-gas-pump text-white"></i>
+                                    <p class="text-white">
+                                        Fuel Management
+                                        <i class="right fas fa-angle-left text-white"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/Combustivel/Index" class="nav-link">
+                                            <i class="fas fa-list-ul text-white nav-icon"></i>
+                                            <p>List</p>
+                                        </a>
+                                    </li>
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/Combustivel/Create" class="nav-link">
+                                                <i class="fas fa-plus text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                        {
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-industry text-white"></i>
+                                    <p class="text-white">
+                                        Brand
+                                        <i class="right fas fa-angle-left text-white"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/Marca/Index" class="nav-link">
+                                            <i class="fas fa-list text-white nav-icon"></i>
+                                            <p>List</p>
+                                        </a>
+                                    </li>
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/Marca/Create" class="nav-link">
+                                                <i class="fas fa-plus-circle text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                        {
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-cogs text-white"></i>
+                                    <p class="text-white">
+                                        Models
+                                        <i class="right fas fa-angle-left text-white"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/Modelo/Index" class="nav-link">
+                                            <i class="fas fa-list text-white nav-icon"></i>
+                                            <p>List</p>
+                                        </a>
+                                    </li>
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/Modelo/Create" class="nav-link">
+                                                <i class="fas fa-plus-circle text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                        {
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-car text-white"></i>
+                                    <p class="text-white">
+                                        Car
+                                        <i class="right fas fa-angle-left text-white"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <!-- List Automovel -->
+                                    <li class="nav-item">
+                                        <a href="~/Automovel/Index" class="nav-link">
+                                            <i class="fas fa-list text-white nav-icon"></i>
+                                            <p>List</p>
+                                        </a>
+                                    </li>
+
+                                    <!-- Add New Automovel (only for permissions 1 and 2) -->
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/Automovel/Create" class="nav-link">
+                                                <i class="fas fa-plus-circle text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                        {
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-bullhorn text-white"></i> <!-- Ícone de anúncio -->
+                                    <p class="text-white">
+                                        Advertisement
+                                        <i class="right fas fa-angle-left text-white"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <!-- List Advertisement -->
+                                    <li class="nav-item">
+                                        <a href="~/Anuncio/Index" class="nav-link">
+                                            <i class="fas fa-list text-white nav-icon"></i>
+                                            <p>List</p>
+                                        </a>
+                                    </li>
+
+                                    <!-- Add New Advertisement (only for permissions 1,2 and 3) -->
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        <li class="nav-item">
+                                            <a href="~/Anuncio/Create" class="nav-link">
+                                                <i class="fas fa-plus-circle text-white nav-icon"></i>
+                                                <p>Add New</p>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+
+
                         @*
-                            @if ((string)Session["UserPerm"] == "admin")
-                            {
+        @if ((string)Session["UserPerm"] == "admin")
+        {
 
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-bars text-white"></i>
-                                        <p class="text-white">
-                                            Versoes
-                                            <i class="right fas fa-angle-left text-white"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="~/Versoes/Index" class="nav-link">
-                                                <i class="far fa-list-alt nav-icon text-white"></i>
-                                                <p>Lista</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="~/Versoes/Create" class="nav-link">
-                                                <i class="fa fa-plus-square nav-icon text-white"></i>
-                                                <p>Criar</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-bars text-white"></i>
+                    <p class="text-white">
+                        Versoes
+                        <i class="right fas fa-angle-left text-white"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="~/Versoes/Index" class="nav-link">
+                            <i class="far fa-list-alt nav-icon text-white"></i>
+                            <p>Lista</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Versoes/Create" class="nav-link">
+                            <i class="fa fa-plus-square nav-icon text-white"></i>
+                            <p>Criar</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-                            }
+        }
                         *@
                         @if ((string)Session["UserPerm"] == "1")
                         {

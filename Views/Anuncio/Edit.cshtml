@@ -1,0 +1,94 @@
+﻿@model StandVirtual.Models.Anuncio
+
+@{
+    ViewBag.Title = "Edit Announcement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-warning text-white">
+            <h2>Edit Announcement</h2>
+        </div>
+
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <!-- Validation Summary -->
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <!-- Form Fields -->
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Titulo, "Title", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title" } })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.DataExpiracao, "Expiration Date", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.DataExpiracao, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.DataExpiracao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Preco, "Price", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Preco, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter price" } })
+                    @Html.ValidationMessageFor(model => model.Preco, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Foto, "Photo URL", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Foto, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter photo URL" } })
+                    @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Video, "Video URL", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Video, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter video URL" } })
+                    @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Descricao, "Description", new { @class = "form-label" })
+                    @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", rows = 5, placeholder = "Enter description" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Dropdowns -->
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.StatusID, "Status", new { @class = "form-label" })
+                    @Html.DropDownList("StatusID", null, "Select status", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.UserId, "User Email", new { @class = "form-label" })
+                    @Html.DropDownList("UserId", null, "Select user", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Save Changes" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

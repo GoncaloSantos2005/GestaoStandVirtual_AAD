@@ -1,0 +1,45 @@
+﻿@model StandVirtual.Models.TipoCombustivel
+
+@{
+    ViewBag.Title = "Delete Fuel Type";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h2>Delete Fuel Type</h2>
+        </div>
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <p class="text-danger"><strong>Are you sure you want to delete this fuel type?</strong></p>
+            <dl class="row">
+                <dt class="col-sm-3">
+                    Description
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.DescricaoTC)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger" />
+                </div>
+            }
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

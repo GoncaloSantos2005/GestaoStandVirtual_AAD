@@ -1,0 +1,47 @@
+﻿@model StandVirtual.Models.Combustivel
+
+@{
+    ViewBag.Title = "Edit Fuel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-warning text-white">
+            <h2>Edit Fuel</h2>
+        </div>
+
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            <p class="text-danger">* All fields are mandatory.</p>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                @Html.HiddenFor(model => model.CombustivelID)
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.TipoComID, "Fuel Type", new { @class = "form-label" })
+                    @Html.DropDownList("TipoComID", null, new { @class = "form-select", required = "required" })
+                    @Html.ValidationMessageFor(model => model.TipoComID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

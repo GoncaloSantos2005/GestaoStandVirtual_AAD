@@ -1,0 +1,117 @@
+﻿@model IEnumerable<StandVirtual.Models.Anuncio>
+
+@{
+    ViewBag.Title = "Announcements";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
+
+<!-- DataTables Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#anuncioTable').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.1/i18n/en-GB.json"
+            }
+        });
+    });
+</script>
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Announcements</h2>
+            <div>
+                @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                {
+                    @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-success me-2" })
+                }
+                <a class="btn btn-dark" href="@Url.Action("Index", "Automovel", new { id = "null" })">
+                    <i class="fas fa-sync-alt"></i> Clear
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!-- Feedback Messages -->
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    @TempData["Message"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            <!-- DataTable -->
+            <table class="table table-striped table-hover" id="anuncioTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Creation Date</th>
+                        <th>Expiration Date</th>
+                        <th>Favorites</th>
+                        <th>Views</th>
+                        <th>Clicks</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>User</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DataCriacao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DataExpiracao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumFav)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumVisualizacoes)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumCliques)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Preco)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Status.TipoStatus.Descricao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Usuario.Email)</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <!-- Edit button: Permissions 1 and 2 -->
+                                    @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2")
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.AnuncioID }, new { @class = "btn btn-warning btn-sm", title = "Edit" })
+                                    }
+
+                                    <!-- Details button: All permissions -->
+                                    @Html.ActionLink("Details", "Details", new { id = item.AnuncioID }, new { @class = "btn btn-info btn-sm", title = "Details" })
+
+                                    <!-- Delete button: Permission 1 only -->
+                                    @if ((string)Session["UserPerm"] == "1")
+                                    {
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.AnuncioID }, new { @class = "btn btn-danger btn-sm", title = "Delete" })
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

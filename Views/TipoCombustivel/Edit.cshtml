@@ -1,0 +1,45 @@
+﻿@model StandVirtual.Models.TipoCombustivel
+
+@{
+    ViewBag.Title = "Edit Fuel Type";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-warning text-white">
+            <h2>Edit Fuel Type</h2>
+        </div>
+
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                @Html.HiddenFor(model => model.TipoComID)
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.DescricaoTC, "Fuel Type Description", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.DescricaoTC, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter fuel type description", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.DescricaoTC, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

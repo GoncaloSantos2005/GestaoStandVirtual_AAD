@@ -1,0 +1,61 @@
+﻿@model StandVirtual.Models.Contacto
+
+@{
+    ViewBag.Title = "Edit Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>Edit Contact</h2>
+        </div>
+
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                @Html.HiddenFor(model => model.Contacto1)
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.NumContacto, "Contact Number", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.NumContacto, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter contact number" } })
+                    @Html.ValidationMessageFor(model => model.NumContacto, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.TipoContactoID, "Contact Type", new { @class = "form-label" })
+                    @Html.DropDownList("TipoContactoID", null, "Select a contact type", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.TipoContactoID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.UserID, "User", new { @class = "form-label" })
+                    @Html.DropDownList("UserID", null, "Select a user", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

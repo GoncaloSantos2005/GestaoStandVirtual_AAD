@@ -1,0 +1,70 @@
+﻿@model StandVirtual.Models.Anuncio
+
+@{
+    ViewBag.Title = "Delete Announcement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h2>Delete Announcement</h2>
+        </div>
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h4 class="text-danger">Are you sure you want to delete this announcement?</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">Title</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Titulo)</dd>
+
+                <dt class="col-sm-4">Creation Date</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.DataCriacao)</dd>
+
+                <dt class="col-sm-4">Expiration Date</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.DataExpiracao)</dd>
+
+                <dt class="col-sm-4">Favorites Count</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumFav)</dd>
+
+                <dt class="col-sm-4">Views</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumVisualizacoes)</dd>
+
+                <dt class="col-sm-4">Clicks</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumCliques)</dd>
+
+                <dt class="col-sm-4">Price</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Preco)</dd>
+
+                <dt class="col-sm-4">Photo</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Foto)</dd>
+
+                <dt class="col-sm-4">Video</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Video)</dd>
+
+                <dt class="col-sm-4">Description</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Descricao)</dd>
+
+                <dt class="col-sm-4">Status</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Status.Descricao)</dd>
+
+                <dt class="col-sm-4">User Email</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Usuario.Email)</dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this announcement?');" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+            }
+        </div>
+    </div>
+</div>

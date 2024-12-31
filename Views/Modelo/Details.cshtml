@@ -1,0 +1,44 @@
+﻿@model StandVirtual.Models.Modelo
+
+@{
+    ViewBag.Title = "Model Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>Model Details</h2>
+        </div>
+        <div class="card-body">
+            @if (TempData["MessageError"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @TempData["MessageError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <dl class="row">
+                <dt class="col-sm-3">
+                    Brand Name
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Marca.NomeMarca)
+                </dd>
+                <dt class="col-sm-3">
+                    Brand Model
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ModeloID }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>
