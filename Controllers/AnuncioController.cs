@@ -339,6 +339,109 @@ namespace StandVirtual.Controllers
             }
         }
 
+        // GET or POST: Anuncio/Search
+        public ActionResult AdList(string titulo)
+        {
+            // Configuração do Hero Section
+            ViewBag.ShowHero = true;
+            ViewBag.HeroTitle = "Find Your Dream Car";
+            ViewBag.HeroDescription = "Browse through thousands of listings.";
+            ViewBag.HeroLink = Url.Action("SellCar", "AutomovelAnuncio");
+
+            // Verifica se o utilizador está autenticado
+            if (Session["UserId"] == null)
+            {
+                TempData["MessageError"] = "You need to log in first!";
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Verifica permissões de acesso
+            if ((string)Session["UserPerm"] != "1" && (string)Session["UserPerm"] != "2" && (string)Session["UserPerm"] != "3")
+            {
+                TempData["MessageError"] = "You do not have permissions to access this page!";
+                return RedirectToAction("Dashboard", "Home");
+            }
+
+            try
+            {
+                // Pesquisa pelo título nos anúncios e inclui a relação com automóveis
+                var anuncios = db.Anuncio
+                    .Include(a => a.Status)
+                    .Include(a => a.Usuario)
+                    .Include(a => a.Automovel)
+                    .Where(a => string.IsNullOrEmpty(titulo) || a.Titulo.Contains(titulo))
+                    .ToList();
+
+                // Verifica se há resultados
+                if (!anuncios.Any())
+                {
+                    if (titulo != null)
+                        TempData["MessageError"] = "No records found.";
+                    return View("AdList", new List<Anuncio>(db.Anuncio.ToList()));
+                }
+
+                return View("AdList", anuncios);
+            }
+            catch (Exception ex)
+            {
+                // Regista o erro nos logs para depuração
+                TempData["MessageError"] = "An error occurred while retrieving the data.";
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+
+                // Retorna uma lista vazia como fallback
+                return View("AdList", new List<Anuncio>(db.Anuncio.ToList()));
+            }
+        }
+
+        // GET: Automovel/DetailsCar/5
+        public ActionResult DetailsCar(int id)
+        {
+            try
+            {
+                // Verifica se o utilizador está autenticado
+                if (Session["UserId"] == null)
+                {
+                    TempData["MessageError"] = "You need to log in first!";
+                    return RedirectToAction("Login", "Home");
+                }
+
+                // Verifica permissões de acesso
+                if ((string)Session["UserPerm"] != "1" && (string)Session["UserPerm"] != "2" && (string)Session["UserPerm"] != "3")
+                {
+                    TempData["MessageError"] = "You do not have permissions to access this page!";
+                    return RedirectToAction("Dashboard", "Home");
+                }
+
+                if (id == 0)
+                {
+                    TempData["MessageError"] = "Invalid ad ID!";
+                    return RedirectToAction("AdList");
+                }
+
+                // Busca o automóvel pelo ID
+                var automovel = db.Automovel
+                    .Include(a => a.Anuncio)
+                    .Include(a => a.Modelo)
+                    .Include(a => a.Combustivel)
+                    .Include(a => a.TipoAutomovel)
+                    .FirstOrDefault(a => a.AnuncioID == id);
+
+                if (automovel == null)
+                {
+                    TempData["MessageError"] = "Car not found!";
+                    return RedirectToAction("AdList");
+                }
+
+                return View(automovel);
+            }
+            catch (Exception ex)
+            {
+                // Regista o erro nos logs para depuração
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+                TempData["MessageError"] = "An unexpected error occurred. Please try again.";
+                return RedirectToAction("AdList");
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

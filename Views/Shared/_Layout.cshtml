@@ -412,6 +412,28 @@
                             </li>
 
                         }
+                        @if ((string)Session["UserPerm"] == "1" || (string)Session["UserPerm"] == "2" || (string)Session["UserPerm"] == "3")
+                        {
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" style="background-color: cadetblue">
+                                    <i class="nav-icon fas fa-bars text-white"></i>
+                                    <p class="text-white">
+                                        Área de cliente
+                                        <i class="right fas fa-angle-left text-white"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/Anuncio/AdList" class="nav-link" style="background-color: darkslateblue">
+                                            <i class="far fa-list-alt nav-icon text-white"></i>
+                                            <p>Lista de Anuncios</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        }
 
 
                     </ul>

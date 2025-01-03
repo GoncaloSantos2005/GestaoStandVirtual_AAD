@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - StandVirtual</title>
+    <!-- Link to CSS framework (Bootstrap) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="website icon" type="png" href="~/Content/Imagens/logomini.png" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .hero {
+            background: url('https://hotcarsbrazil.com/assets/images/home/search.png') no-repeat center center/cover;
+            color: white;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+            .hero h1 {
+                font-size: 3rem;
+                font-weight: bold;
+            }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+
+            footer a {
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Create", "Home")">StandVirtual</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewBag.ActivePage == "AdList" ? "active" : "")" href="@Url.Action("AdList", "Anuncio")">Home</a>
+                    </li>
+                    <!-- Browse Cars Nav Item -->
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewBag.ActivePage == "BrowseCars" ? "active" : "")" href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            Browse Cars
+                        </a>
+                    </li>
+
+                    <!-- Search Modal -->
+                    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="searchModalLabel">Search for Cars</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="searchForm" method="get" action="@Url.Action("AdList", "Anuncio")">
+                                        <div class="mb-3">
+                                            <label for="searchTitle" class="form-label">Enter Ad Title</label>
+                                            <input type="text" class="form-control" id="searchTitle" name="titulo" placeholder="Enter ad title..." required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            Search
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewBag.ActivePage == "SellCar" ? "active" : "")" href="@Url.Action("SellCar", "AutomovelAnuncio")">Sell a Car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewBag.ActivePage == "Contact" ? "active" : "")" href="@Url.Action("Contacts", "Home")">Contact</a>
+                    </li>
+                    <li>
+                        <span>&nbsp;</span>
+                    </li>
+                    <!-- User Info / Login-Logout -->
+                    <li class="nav-item dropdown">
+                        @if (Session["UserId"] != null)
+                        {
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i> @Session["UserNome"]
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("Dashboard", "Home")">
+                                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="@Url.Action("Logout", "Home")">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <a class="nav-link btn btn-primary text-white" href="@Url.Action("Login", "Home")">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    @if (ViewBag.ShowHero != null && ViewBag.ShowHero)
+    {
+        <div class="hero">
+            <div>
+                <h1>@ViewBag.HeroTitle</h1>
+                <p>@ViewBag.HeroDescription</p>
+                <a href="@ViewBag.HeroLink" class="btn btn-primary btn-lg">Get Started</a>
+            </div>
+        </div>
+    }
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        @RenderBody()
+    </div>
+
+    <br /><br /><br /><br /><br /><br />
+
+    <!-- Footer -->
+    <footer class="text-center fixed-bottom bg-dark text-white py-3">
+        <div class="container">
+            <p class="mb-0">&copy; @DateTime.Now.Year StandVirtual. All Rights Reserved.</p>
+            <a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms of Service</a>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts Section -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

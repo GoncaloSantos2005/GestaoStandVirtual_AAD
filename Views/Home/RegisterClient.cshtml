@@ -1,0 +1,132 @@
+﻿@model StandVirtual.Models.UsuarioContactoViewModel
+
+@{
+    ViewBag.Title = "Register Client";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary fw-bold mb-4">
+        <i class="fas fa-user-plus"></i> Register Client
+    </h2>
+
+    <!-- Display Messages -->
+    @if (TempData["MessageError"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["MessageError"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @using (Html.BeginForm("RegisterClient", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card shadow-lg border-0">
+            <div class="card-body">
+                <h4 class="text-secondary mb-4">Client Details</h4>
+
+                <!-- Name -->
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Usuario.Nome, "Name", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Usuario.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Usuario.Nome, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Usuario.Email, "Email", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Usuario.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Usuario.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Usuario.Password, "Password", new { @class = "form-label" })
+                    @Html.PasswordFor(model => model.Usuario.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Usuario.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Postal Code -->
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Usuario.CodPostalId, "Postal Code", new { @class = "form-label" })
+                    @Html.DropDownListFor(
+                        model => model.Usuario.CodPostalId,
+                        ViewBag.CodPostalId as IEnumerable<SelectListItem>,
+                        "Select a postal code",
+                        new { @class = "form-select" }
+                    )
+                    @Html.ValidationMessageFor(model => model.Usuario.CodPostalId, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Contact Details -->
+                <h4 class="text-secondary mt-4 mb-4">Contact Details</h4>
+
+                <div id="contactos-container">
+                    @for (int i = 0; i < Model.Contactos.Count; i++)
+                    {
+                        <div class="contacto-item border p-3 mb-3">
+                            <!-- Phone Number -->
+                            <div class="mb-3">
+                                @Html.LabelFor(model => model.Contactos[i].NumContacto, "Phone Number", new { @class = "form-label" })
+                                @Html.EditorFor(model => model.Contactos[i].NumContacto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Contactos[i].NumContacto, "", new { @class = "text-danger" })
+                            </div>
+
+                            <!-- Contact Type -->
+                            <div class="mb-3">
+                                @Html.LabelFor(model => model.Contactos[i].TipoContactoID, "Contact Type", new { @class = "form-label" })
+                                @Html.DropDownListFor(
+                                    model => model.Contactos[i].TipoContactoID,
+                                    ViewBag.TipoContactoID as SelectList,
+                                    "Select Type",
+                                    new { @class = "form-select" }
+                                )
+                                @Html.ValidationMessageFor(model => model.Contactos[i].TipoContactoID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <button type="button" class="btn btn-danger remove-contacto">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    }
+                </div>
+
+                <button type="button" class="btn btn-primary mb-3" id="add-contacto">
+                    <i class="fas fa-plus"></i> Add Contact
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-check-circle"></i> Register
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    document.getElementById("add-contacto").addEventListener("click", function () {
+        const container = document.getElementById("contactos-container");
+        const newContacto = container.firstElementChild.cloneNode(true);
+
+        // Reset values for new contact input
+        newContacto.querySelectorAll("input, select").forEach(el => el.value = "");
+
+        container.appendChild(newContacto);
+    });
+
+    document.addEventListener("click", function (e) {
+        if (e.target && e.target.classList.contains("remove-contacto")) {
+            const contactoItem = e.target.closest(".contacto-item");
+            if (document.querySelectorAll(".contacto-item").length > 1) {
+                contactoItem.remove();
+            } else {
+                alert("At least one contact is required.");
+            }
+        }
+    });
+</script>

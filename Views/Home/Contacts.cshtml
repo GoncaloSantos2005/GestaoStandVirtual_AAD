@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Contacts - Practical Work";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container mt-5">
+    <!-- Introduction -->
+    <h2 class="text-center text-primary fw-bold mb-4">
+        <i class="fas fa-database"></i> Practical Work - Data Storage and Access
+    </h2>
+    <p class="text-center text-muted mb-5">
+        This practical work was developed as part of the course
+        <strong>Data Storage and Access</strong>, guided by
+        <strong>Prof. Paulo Adriano Marques Sousa Teixeira</strong>. The project focuses on creating an
+        application with functional interface(s) that interact directly with a database, using modern development
+        and integration techniques.
+    </p>
+
+    <!-- Project Examples -->
+    <div class="card shadow border-0 mb-5">
+        <div class="card-body">
+            <h3 class="text-secondary mb-4">
+                <i class="fas fa-tasks"></i> Project Features
+            </h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <i class="fas fa-plus-circle text-primary"></i>
+                    <strong>Insert data into multiple tables:</strong>
+                    <a href="@Url.Action("RegisterClient", "Home")" class="btn btn-link">Example</a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fas fa-edit text-warning"></i>
+                    <strong>Update data:</strong>
+                    <a href="@Url.Action("Edit", "Contactos")" class="btn btn-link">Example</a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fas fa-trash-alt text-danger"></i>
+                    <strong>Delete data:</strong>
+                    <a href="@Url.Action("Delete", "Contactos")" class="btn btn-link">Example</a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fas fa-search text-info"></i>
+                    <strong>Query derived from multiple tables:</strong>
+                    <a href="@Url.Action("ListClientDetails", "Home")" class="btn btn-link">Example</a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fas fa-database text-success"></i>
+                    <strong>Stored Procedure:</strong>
+                    <a href="@Url.Action("ListClient", "Home")" class="btn btn-link">Example</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Team -->
+    <h3 class="text-center text-primary fw-bold mb-4">
+        <i class="fas fa-users"></i> Development Team
+    </h3>
+    <div class="row justify-content-center">
+        <!-- Card: Gonçalo Rodrigues dos Santos -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">Gonçalo Rodrigues dos Santos</h5>
+                    <p class="card-text">ID: 27985</p>
+                    <a href="mailto:goncalo.santos@example.com" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Card: Carolina Macedo Branco -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">Carolina Macedo Branco</h5>
+                    <p class="card-text">ID: 27983</p>
+                    <a href="mailto:carolina.branco@example.com" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Card: André Soares Ferreira -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">André Soares Ferreira</h5>
+                    <p class="card-text">ID: 21147</p>
+                    <a href="mailto:andre.ferreira@example.com" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-5">
+        <p class="text-muted">
+            <i class="fas fa-calendar-alt"></i> Academic Year: <strong>2024/2025</strong>
+        </p>
+    </div>
+</div>

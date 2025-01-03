@@ -1,0 +1,59 @@
+﻿@model IEnumerable<StandVirtual.Models.Anuncio>
+
+@{
+    ViewBag.Title = "Featured Cars";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2 class="text-center mb-4">Featured Cars</h2>
+
+<!-- MessageError -->
+@if (TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["MessageError"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var anuncio in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <img src="@(string.IsNullOrEmpty(anuncio.Foto) ? "https://via.placeholder.com/300x200" : anuncio.Foto)"
+                         class="card-img-top"
+                         alt="@(string.IsNullOrEmpty(anuncio.Titulo) ? "Car Image" : anuncio.Titulo)">
+                    <div class="card-body">
+                        <h5 class="card-title">@anuncio.Titulo</h5>
+                        <p class="card-text">
+                            <strong>Price:</strong> &euro;@String.Format("{0:N0}", anuncio.Preco)<br>
+                            <strong>Year:</strong> @anuncio.DataCriacao.Year<br>
+                            <strong>Description:</strong>
+                            @(string.IsNullOrEmpty(anuncio.Descricao)
+                                ? "No description available."
+                                : anuncio.Descricao.Substring(0, Math.Min(anuncio.Descricao.Length, 50)) + "...")<br>
+                        </p>
+                        <a href="@Url.Action("DetailsCar", "Anuncio", new { id = anuncio.AnuncioID })" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <p class="text-center text-muted">No cars available at the moment.</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Featured Cars Section Loaded');
+        });
+    </script>
+}

@@ -1,0 +1,164 @@
+﻿@model StandVirtual.Models.AutomovelAnuncioViewModel
+
+@{
+    ViewBag.Title = "Sell Your Car";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary fw-bold mb-4">
+        <i class="fas fa-car"></i> Sell Your Car
+    </h2>
+    <p class="text-center text-muted mb-5">Fill out the form below to list your car for sale!</p>
+    <!-- Display messages -->
+    @if (TempData["MessageError"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["MessageError"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["MessageSuccess"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @using (Html.BeginForm("SellCar", "AutomovelAnuncio", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card shadow-lg border-0">
+            <!-- Ad Details -->
+            <div class="card-body">
+                <h3 class="text-secondary mb-4">
+                    <i class="fas fa-bullhorn"></i> Ad Details
+                </h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Anuncio.Titulo, "Title", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Anuncio.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Anuncio.Titulo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Anuncio.Preco, "Price (€)", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Anuncio.Preco, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Anuncio.Preco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Anuncio.Descricao, "Description", new { @class = "form-label" })
+                        @Html.TextAreaFor(model => model.Anuncio.Descricao, new { @class = "form-control", rows = 4, placeholder = "Provide details about the car..." })
+                        @Html.ValidationMessageFor(model => model.Anuncio.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.Label("Photo", new { @class = "form-label" })
+                        <input name="Anuncio.Foto" class="form-control" />
+                    </div>
+                </div>
+
+                <!-- Car Details -->
+                <h3 class="text-secondary mt-4 mb-4">
+                    <i class="fas fa-car-side"></i> Car Details
+                </h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.MatriculaAut, "License Plate", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Automovel.MatriculaAut, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Automovel.MatriculaAut, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.Ano, "Year", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Automovel.Ano, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Automovel.Ano, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.NumPortas, "Number of Doors", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Automovel.NumPortas, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Automovel.NumPortas, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.Cor, "Color", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Automovel.Cor, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Automovel.Cor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.Potencia, "Power (HP)", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Automovel.Potencia, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Automovel.Potencia, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.Cilindrada, "Cubic Capacity (cc)", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Automovel.Cilindrada, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Automovel.Cilindrada, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <h3 class="text-secondary mt-4 mb-4">
+                    <i class="fas fa-tachometer-alt"></i> Additional Details
+                </h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.TipoAutomovelID, "Car Type", new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.Automovel.TipoAutomovelID, ViewBag.TipoAutomovelID as SelectList, "Select Car Type", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Automovel.TipoAutomovelID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.CombustivelID, "Fuel Type", new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.Automovel.CombustivelID, ViewBag.CombustivelID as SelectList, "Select Fuel Type", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Automovel.CombustivelID, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.TipoCaixa, "Gearbox Type", new { @class = "form-label" })
+                        @Html.DropDownListFor(
+                            model => model.Automovel.TipoCaixa,
+                            new SelectList(new[]
+                            {
+                                new { Text = "Manual", Value = "Manual" },
+                                new { Text = "Automatic", Value = "Automatic" }
+                            }, "Value", "Text"),
+                            "Select gearbox type",
+                            new { @class = "form-control" }
+                        )
+                        @Html.ValidationMessageFor(model => model.Automovel.TipoCaixa, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.Quilometros, "Mileage (KM)", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Automovel.Quilometros, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter mileage (km)" } })
+                        @Html.ValidationMessageFor(model => model.Automovel.Quilometros, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.ModeloID, "Model", new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.Automovel.ModeloID, ViewBag.ModeloID as SelectList, "Select Model", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Automovel.ModeloID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Automovel.Importado, "Is Imported?", new { @class = "form-check-label" })
+                        <div class="form-check">
+                            @Html.CheckBoxFor(model => model.Automovel.Importado, new { @class = "form-check-input" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Automovel.Importado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="card-footer text-center bg-light">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-check-circle"></i> Submit
+                </button>
+                <a href="@Url.Action("AdList", "Automovel")" class="btn btn-secondary">
+                    <i class="fas fa-times-circle"></i> Cancel
+                </a>
+            </div>
+        </div>
+    }
+</div>

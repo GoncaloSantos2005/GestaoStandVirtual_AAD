@@ -1,15 +1,60 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Dashboard";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = (Convert.ToInt32(Session["UserPerm"]) == 1 || Convert.ToInt32(Session["UserPerm"]) == 2)
+        ? "~/Views/Shared/_Layout.cshtml"
+        : "~/Views/Shared/_Layout2.cshtml";
 }
 
-
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1 class="display-4 text-primary">
+                Welcome to the Dashboard
+            </h1>
+            <p class="lead text-muted">
+                Manage your tasks and monitor your progress efficiently.
+            </p>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-secondary">
+                            <i class="fas fa-car"></i> Manage Cars
+                        </h5>
+                        <p class="card-text text-muted">
+                            Add, update, or view your car listings in one place.
+                        </p>
+                        <a href="@Url.Action("AdList", "Anuncio")" class="btn btn-primary">Go to Cars</a>
+                    </div>
+                </div>
+            </div>
+            @{ if (Convert.ToInt32(Session["UserPerm"]) == 1)
+                {
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-secondary">
+                                    <i class="fas fa-users"></i> Manage Users
+                                </h5>
+                                <p class="card-text text-muted">
+                                    View and manage user accounts and permissions.
+                                </p>
+                                <a href="@Url.Action("ListClient", "Home")" class="btn btn-secondary">Go to Users</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="mt-4 text-center">
+            @Html.ActionLink("Back to Contacts", "Contacts", null, new { @class = "btn btn-secondary" })
+        </div>
     </div>
 </body>

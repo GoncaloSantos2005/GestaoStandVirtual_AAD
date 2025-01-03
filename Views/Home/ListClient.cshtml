@@ -1,0 +1,108 @@
+﻿@model IEnumerable<StandVirtual.Models.ClienteComContacto>
+
+@{
+    ViewBag.Title = "List Clients";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary fw-bold mb-4">
+        <i class="fas fa-users"></i> Client List
+    </h2>
+
+    <!-- Display Messages -->
+    @if (TempData["MessageError"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["MessageError"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Table of Clients -->
+<div class="table-responsive mt-4">
+    <table class="table table-bordered table-hover table-striped align-middle">
+        <thead class="bg-primary text-white text-center">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Creation Date</th>
+                <th>Contact</th>
+                <th>Contact Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var client in Model)
+                {
+                    <tr>
+                        <td class="text-center">@client.UserID</td>
+                        <td>@client.Nome</td>
+                        <td>@client.Email</td>
+                        <td class="text-center">@client.DataCriacao.ToString("dd/MM/yyyy")</td>
+                        <td class="text-center">
+                            @Html.Raw(client.NumContacto.HasValue
+                                ? client.NumContacto.ToString()
+                                : "<span class='text-danger'>No contact</span>")
+                        </td>
+                        <td class="text-center">
+                            @Html.Raw(string.IsNullOrEmpty(client.DescricaoTipoContacto)
+                                ? "<span class='text-muted'>N/A</span>"
+                                : client.DescricaoTipoContacto)
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">
+                        <i class="fas fa-info-circle"></i> No data found.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="mt-4 text-center">
+        @Html.ActionLink("Back to Contacts", "Contacts", null, new { @class = "btn btn-secondary" })
+    </div>
+    <br />
+</div>
+    <!-- Stored Procedure Display -->
+    <!-- Display SQL Query -->
+    <div class="card bg-light border-primary mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-primary">
+                <i class="fas fa-code"></i> Stored Procedure Used
+            </h5>
+            <pre class="text-dark bg-white p-3 rounded border border-secondary">
+        SET ANSI_NULLS ON
+        SET QUOTED_IDENTIFIER ON
+
+        CREATE PROCEDURE spListarClientes
+        AS
+        BEGIN
+            SELECT DISTINCT
+                u.UserID,
+                u.Nome,
+                u.Email,
+                u.DataCriacao,
+                STRING_AGG(c.NumContacto, ', ') AS Contactos,
+                STRING_AGG(tc.DescricaoTipoContacto, ', ') AS TiposContacto
+            FROM Usuario u
+            LEFT JOIN Contacto c ON u.UserID = c.UserID
+            LEFT JOIN TipoContacto tc ON c.TipoContactoID = tc.TipoContacto
+            GROUP BY u.UserID, u.Nome, u.Email, u.DataCriacao;
+        END
+    </pre>
+        </div>
+</div>

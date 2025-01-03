@@ -20,7 +20,7 @@ namespace StandVirtual.Models
         public string Cor { get; set; }
         public int Potencia { get; set; }
         public int Cilindrada { get; set; }
-        public int TipoCaixa { get; set; }
+        public string TipoCaixa { get; set; }
         public double Quilometros { get; set; }
         public int TipoAutomovelID { get; set; }
         public int ModeloID { get; set; }

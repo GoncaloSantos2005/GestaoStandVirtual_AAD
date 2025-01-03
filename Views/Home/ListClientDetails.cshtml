@@ -1,0 +1,177 @@
+﻿@model IEnumerable<StandVirtual.Models.ClienteDetalhesViewModel>
+
+@{
+    ViewBag.Title = "A Query Derived from Multiple Tables";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary fw-bold mb-4">
+        <i class="fas fa-database"></i> A Query Derived from Multiple Tables
+    </h2>
+
+    <!-- Display messages -->
+    @if (TempData["MessageError"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["MessageError"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Table to display client details -->
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="bg-primary text-white text-center">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Contact</th>
+                <th>Contact Type</th>
+                <th>Ad ID</th>
+                <th>Ad Title</th>
+                <th>Price (€)</th>
+                <th>Plate</th>
+                <th>Model</th>
+                <th>Brand</th>
+                <th>Year</th>
+                <th>Color</th>
+                <th>Fuel</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                int count = 1; // Counter for row numbers
+                foreach (var cliente in Model)
+                {
+                    <tr>
+                        <td class="text-center">@count</td>
+                        <td>@cliente.NomeCliente</td>
+                        <td>@cliente.Email</td>
+                        <td class="text-center">@cliente.DataCriacaoCliente.ToShortDateString()</td>
+                        <td class="text-center">
+                            @Html.Raw(cliente.Contacto.HasValue
+                                ? cliente.Contacto.ToString()
+                                : "<span class='text-danger'>No contact</span>")
+                        </td>
+                        <td class="text-center">
+                            @Html.Raw(!string.IsNullOrEmpty(cliente.TipoContacto)
+                                ? cliente.TipoContacto
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td class="text-center">
+                            @Html.Raw(cliente.IDAnuncio.HasValue
+                                ? cliente.IDAnuncio.ToString()
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td>
+                            @Html.Raw(!string.IsNullOrEmpty(cliente.TituloAnuncio)
+                                ? cliente.TituloAnuncio
+                                : "<span class='text-muted'>No ad</span>")
+                        </td>
+                        <td class="text-end">
+                            @Html.Raw(cliente.PrecoAnuncio.HasValue
+                                ? cliente.PrecoAnuncio.Value.ToString("N2")
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td>
+                            @Html.Raw(!string.IsNullOrEmpty(cliente.Matricula)
+                                ? cliente.Matricula
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td>
+                            @Html.Raw(!string.IsNullOrEmpty(cliente.Modelo)
+                                ? cliente.Modelo
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td>
+                            @Html.Raw(!string.IsNullOrEmpty(cliente.Marca)
+                                ? cliente.Marca
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td class="text-center">
+                            @Html.Raw(cliente.AnoAutomovel.HasValue
+                                ? cliente.AnoAutomovel.ToString()
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td>
+                            @Html.Raw(!string.IsNullOrEmpty(cliente.Cor)
+                                ? cliente.Cor
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                        <td>
+                            @Html.Raw(!string.IsNullOrEmpty(cliente.Combustivel)
+                                ? cliente.Combustivel
+                                : "<span class='text-muted'>N/A</span>")
+                        </td>
+                    </tr>
+                    count++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="15" class="text-center text-muted">
+                        <i class="fas fa-info-circle"></i> No data found.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="mt-4 text-center">
+        @Html.ActionLink("Back to Contacts", "Contacts", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>
+    <br />
+    <!-- Display SQL Query -->
+    <div class="card bg-light border-primary mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-primary">
+                <i class="fas fa-code"></i> SQL Query Used
+            </h5>
+            <pre class="text-dark bg-white p-3 rounded border border-secondary">
+            SELECT DISTINCT 
+                u.UserID AS ClienteID,
+                u.Nome AS NomeCliente,
+                u.Email AS Email,
+                u.DataCriacao AS DataCriacaoCliente,
+                c.NumContacto AS Contacto,
+                tc.DescricaoTipoContacto AS TipoContacto,
+                a.AnuncioID AS IDAnuncio,
+                a.Titulo AS TituloAnuncio,
+                a.Preco AS PrecoAnuncio,
+                a.DataCriacao AS DataAnuncio,
+                aut.MatriculaAut AS Matricula,
+                aut.Ano AS AnoAutomovel,
+                aut.Cor AS CorAutomovel,
+                mod.Descricao AS Modelo,
+                mar.NomeMarca AS Marca,
+                tcomb.DescricaoTC AS Combustivel
+            FROM Usuario u
+            LEFT JOIN Contacto c ON u.UserID = c.UserID
+            LEFT JOIN TipoContacto tc ON c.TipoContactoID = tc.TipoContacto
+            LEFT JOIN Anuncio a ON u.UserID = a.UserId  
+            LEFT JOIN Automovel aut ON a.AnuncioID = aut.AnuncioID
+            LEFT JOIN Modelo mod ON aut.ModeloID = mod.ModeloID
+            LEFT JOIN Marca mar ON mod.MarcaID = mar.MarcaID
+            LEFT JOIN Combustivel comb ON aut.CombustivelID = comb.CombustivelID
+            LEFT JOIN TipoCombustivel tcomb ON comb.TipoComID = tcomb.TipoComID
+            ORDER BY u.Nome, a.DataCriacao DESC;
+        </pre>
+        </div>
+
+
+    </div>
+
+
+</div>

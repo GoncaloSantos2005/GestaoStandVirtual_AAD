@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StandVirtualTestesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StandVirtualTestesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Anuncio">
           <Key>
             <PropertyRef Name="AnuncioID" />
@@ -33,7 +33,7 @@
           <Property Name="Cor" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Potencia" Type="int" Nullable="false" />
           <Property Name="Cilindrada" Type="int" Nullable="false" />
-          <Property Name="TipoCaixa" Type="int" Nullable="false" />
+          <Property Name="TipoCaixa" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Quilometros" Type="float" Nullable="false" />
           <Property Name="TipoAutomovelID" Type="int" Nullable="false" />
           <Property Name="ModeloID" Type="int" Nullable="false" />
@@ -732,8 +732,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StandVirtualTestesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -771,7 +770,7 @@
           <Property Name="Cor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Potencia" Type="Int32" Nullable="false" />
           <Property Name="Cilindrada" Type="Int32" Nullable="false" />
-          <Property Name="TipoCaixa" Type="Int32" Nullable="false" />
+          <Property Name="TipoCaixa" Nullable="false" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Quilometros" Type="Double" Nullable="false" />
           <Property Name="TipoAutomovelID" Type="Int32" Nullable="false" />
           <Property Name="ModeloID" Type="Int32" Nullable="false" />

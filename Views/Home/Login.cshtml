@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Gestão StandVirtual</title>
+    <title>Login StandVirtual Management</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -22,13 +22,12 @@
         }
 
         body {
-            background: linear-gradient(to bottom right, #74ebd5, #9face6);
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            font-family: 'Roboto', Arial, sans-serif;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
 
         .wave-container {
@@ -73,24 +72,36 @@
         }
 
         @@keyframes wave {
-            0% { background-position-x: 0; }
-            100% { background-position-x: 1000px; }
+            0% {
+                background-position-x: 0;
+            }
+
+            100% {
+                background-position-x: 1000px;
+            }
         }
 
         @@keyframes wave-reverse {
-            0% { background-position-x: 0; }
-            100% { background-position-x: -1000px; }
+            0% {
+                background-position-x: 0;
+            }
+
+            100% {
+                background-position-x: -1000px;
+            }
         }
 
         .login-container {
-            position: relative;
-            width: 400px;
-            padding: 20px;
-            background: #f1f1f1;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
-            animation: slide-up 0.5s ease-in-out forwards;
+            position: relative;
+            z-index: 10;
+            animation: fade-in 0.6s ease-in-out;
         }
 
         .login-container h2 {
@@ -99,43 +110,46 @@
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
+            color: #555;
         }
 
         .form-group input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             font-size: 14px;
+            transition: border-color 0.3s;
         }
 
         .form-group input:focus {
-            border-color: #4CAF50;
+            border-color: #74ebd5;
             outline: none;
         }
 
         .login-btn {
             width: 100%;
             padding: 12px;
-            background: #4CAF50;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s;
         }
 
         .login-btn:hover {
-            background: #3e8e41;
+            background: linear-gradient(135deg, #9face6, #74ebd5);
         }
 
         .error-message {
@@ -144,17 +158,45 @@
             border: 1px solid red;
             color: red;
             background: #ffe5e5;
-            border-radius: 5px;
+            border-radius: 8px;
         }
 
-        @@keyframes slide-up {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .signup-message {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .signup-message a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .signup-message a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @@keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="wave-container">
+    <div class="wave-container">    
         <div class="wave wave1"></div>
         <div class="wave wave2"></div>
         <div class="wave wave3"></div>
@@ -162,7 +204,7 @@
     </div>
 
     <div class="login-container">
-        <h2>Login<br>StandVirtual Management</h2>
+        <img src="~/Content/Imagens/logo.png" alt="StandVirtual Logo" class="logo" />
 
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
@@ -189,12 +231,18 @@
             </div>
 
             <input type="submit" value="Login" class="login-btn" />
+
+
         }
+        <div class="signup-message">
+            <p>Don't have an account?</p> <a href="@Url.Action("RegisterClient", "Home")" class="btn btn-link">Sign up here</a>
+        </div>
+
+
     </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-
 </body>
 </html>
