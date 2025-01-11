@@ -173,11 +173,11 @@ namespace StandVirtual.Controllers
                     db.SaveChanges();
 
                     TempData["Message"] = "Customer and contacts registered successfully!";
-                    return RedirectToAction("ListaClientes");
+                    return RedirectToAction("Contacts");
                 }
                 catch (Exception ex)
                 {
-                    TempData["MessageError"] = $"Erro ao registar cliente: {ex.Message}";
+                    TempData["MessageError"] = $"Error registering client: {ex.Message}";
                 }
             }
 
